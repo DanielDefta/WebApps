@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/* import { Injectable } from '@angular/core';
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -21,4 +21,4 @@ export class DataService {
       .map(result => this.result = result.json().data);
   }
 
-}
+} */
