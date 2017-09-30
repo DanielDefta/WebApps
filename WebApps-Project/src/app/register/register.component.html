@@ -1,30 +1,81 @@
-<div class="col-md-6 col-md-offset-3">
-    <h2>Register</h2>
-    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="firstName">First Name</label>
-            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
-            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+
+<app-header></app-header>
+<div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
+        <div style="width:100%; height:100%;">
+            
+                <alert></alert>
+            <div class="jumbotron" style="width:100%;">
+
+                <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate style="width: 80%; margin:0 10% 0% 10%">
+                    <div class="form-group">
+                        <h2>Register</h2>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required />
+                        <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+                        <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+                        <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+                        <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !veiligheidsVraag1.valid }">
+                        <label for="veiligheidsVraag1"> Beveiliginsvraag 1</label>
+
+                        <select class="form-control" name="veiligheidsVraag1" id="veiligheidsVraag1" [(ngModel)]="model.veiligheidsVraag1" #veiligheidsVraag1="ngModel"
+                            required>
+                        <option value="Bla bla" selected>Wat was de eerste film die je in de bioscoop zag?</option>
+                        <option>Waar ging je naartoe toen je voor het eerst vloog?</option>
+                        <option>Hoe heette je favoriete leerkracht op de basisschool?</option>
+                        <option>Wat is je droombaan?</option>
+                        <option>Wat is je favoriete kinderboek?</option>
+                </select>
+                        <div *ngIf="f.submitted && !veiligheidsVraag1.valid" class="help-block">Required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !aantwoordVraag1.valid }">
+                        <label for="aantwoordVraag1">Aantwoord</label>
+                        <input type="text" class="form-control" name="aantwoordVraag1" [(ngModel)]="model.aantwoordVraag1" #aantwoordVraag1="ngModel"
+                            required />
+                        <div *ngIf="f.submitted && !aantwoordVraag1.valid" class="help-block">Aantwoord is required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !veiligheidsVraag2.valid }">
+                        <label for="veiligheidsVraag2"> Beveiliginsvraag 1</label>
+                        <select class="form-control" name="veiligheidsVraag2" id="veiligheidsVraag2" [(ngModel)]="model.veiligheidsVraag2" #veiligheidsVraag2="ngModel"
+                            required>
+                            <option>Wat was het model van je eerste auto?</option>
+                            <option>Welke bijnaam had je als kind?</option>
+                            <option>Wie was je favoriete acteur tijdens je schooltijd?</option>
+                            <option>Wie was je favoriete zanger of band tijdens je schooltijd?</option>
+                            <option>Wat was de naam van de straat waar je opgroeide?</option>
+                    </select>
+                        <div *ngIf="f.submitted && !veiligheidsVraag2.valid" class="help-block">Required</div>
+                    </div>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !aantwoordVraag2.valid }">
+                        <label for="aantwoordVraag2">Aantwoord</label>
+                        <input type="text" class="form-control" name="aantwoordVraag2" [(ngModel)]="model.aantwoordVraag2" #aantwoordVraag2="ngModel"
+                            required />
+                        <div *ngIf="f.submitted && !aantwoordVraag2.valid" class="help-block">Aantwoord is required</div>
+                    </div>
+                    <div class="form-group">
+                        <button [disabled]="loading" class="btn btn-primary">Register</button>
+                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                        />
+                        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="lastName">Last Name</label>
-            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
-            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
-            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
-        </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-        </div>
-        <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
-            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
-        </div>
-    </form>
+    </div>
 </div>

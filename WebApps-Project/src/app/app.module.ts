@@ -36,6 +36,9 @@ import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 
+import {HeaderComponent} from './header/header.component';
+import {WelcomeheaderComponent} from './header/welcomeheader.component';
+import {WelcomeComponent} from './welcome/welcome.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -50,6 +53,9 @@ import { RegisterComponent } from './register/register.component';
     declarations: [
         AppComponent,
         AlertComponent,
+        HeaderComponent,
+        WelcomeheaderComponent,
+        WelcomeComponent,
         HomeComponent,
         LoginComponent,
         RegisterComponent

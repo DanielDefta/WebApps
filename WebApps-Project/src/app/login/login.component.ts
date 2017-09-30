@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
  
@@ -26,6 +27,8 @@ export class LoginComponent implements OnInit {
  
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        
+        if(this.returnUrl == "/") this.returnUrl = '/home';
     }
  
     login() {
