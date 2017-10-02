@@ -35,10 +35,12 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
+import { BedrijfService } from './_services/bedrijf.service';
 
 import {HeaderComponent} from './header/header.component';
 import {WelcomeheaderComponent} from './header/welcomeheader.component';
 import {WelcomeComponent} from './welcome/welcome.component';
+import {MijnprofielComponent} from './mijnProfiel/mijnprofiel.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -56,6 +58,7 @@ import { RegisterComponent } from './register/register.component';
         HeaderComponent,
         WelcomeheaderComponent,
         WelcomeComponent,
+        MijnprofielComponent,
         HomeComponent,
         LoginComponent,
         RegisterComponent
@@ -65,7 +68,8 @@ import { RegisterComponent } from './register/register.component';
         AuthGuard,
         AlertService,
         AuthenticationService,
-        UserService
+        UserService,
+        BedrijfService
     ],
     bootstrap: [AppComponent]
 })

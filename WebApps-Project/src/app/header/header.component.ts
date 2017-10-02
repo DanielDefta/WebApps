@@ -3,28 +3,34 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 
+import {Bedrijf} from '../_models/bedrijf';
+import {Locatie} from '../_models/locatie';
+
+import { AlertService } from '../_services/alert.service';
+import { BedrijfService } from '../_services/bedrijf.service';
+
 @Component({
     selector: 'app-header',
-   moduleId: module.id,
-   templateUrl: 'header.component.html'
+    moduleId: module.id,
+    templateUrl: 'header.component.html'
 })
 
-export class HeaderComponent{
-   currentUser: User;
-   /*
-   users: User[] = [];
-
-   constructor(private userService: UserService) {
-       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-   }
-   ngOnInit() {
-    this.loadAllUsers();
-   }
-
-   private loadAllUsers() {
-    this.userService.getAll().subscribe(users => { this.users = users; });
-}*/
-constructor(private userService: UserService) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-}
+export class HeaderComponent {
+    currentUser: User;
+    bedrijf: Bedrijf;
+    constructor(private userService: UserService,private bedrijfService: BedrijfService,private alertService: AlertService) {
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if(this.currentUser!=null)
+            this.laadBedrijf();
+    }
+    private laadBedrijf() {
+     /* this.bedrijfService.create(new Bedrijf("HoGent","Een omschrijving van deze bedrijf",new Locatie("","",9470,"",""))).subscribe(
+         data => {
+             this.alertService.success('Registration successful', true);
+         },
+         error => {
+             this.alertService.error(error);
+         }); */
+     this.bedrijfService.getById("59d0096c0182fb29d177774f").subscribe((bedrijf) => { this.bedrijf = bedrijf });
+ }
 }

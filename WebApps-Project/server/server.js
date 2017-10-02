@@ -5,7 +5,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
- 
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,10 +22,13 @@ app.use(expressJwt({
         return null;
     }
 }).unless({ path: ['/users/authenticate', '/users/register'] }));
- 
+
+
+
 // routes
 app.use('/users', require('./controllers/users.controller'));
- 
+app.use('/bedrijf', require('./controllers/bedrijf.controller'));
+
 // start server
 var port = process.env.NODE_ENV === 'production' ? 80 : 4000;
 var server = app.listen(port, function () {

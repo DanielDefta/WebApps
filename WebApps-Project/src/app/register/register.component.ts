@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
  
+import {User} from '../_models/user';
+import {Locatie} from '../_models/locatie';
 import { AlertService } from '../_services/alert.service';
 import { UserService } from '../_services/user.service';
  
@@ -10,16 +12,18 @@ import { UserService } from '../_services/user.service';
 })
  
 export class RegisterComponent {
-    model: any = {};
+    model:User = new User("","","","","","","","","",new Locatie("","",undefined,"",""));
     loading = false;
  
     constructor(
         private router: Router,
         private userService: UserService,
-        private alertService: AlertService) { }
+        private alertService: AlertService) { 
+        }
  
     register() {
         this.loading = true;
+        console.log(this.model);
         this.userService.create(this.model)
             .subscribe(
                 data => {
