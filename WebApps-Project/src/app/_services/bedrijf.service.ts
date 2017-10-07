@@ -16,9 +16,6 @@ export class BedrijfService {
     }
  
     create(bedrijf: Bedrijf) {
-        
-       console.log("2");
-       console.log(bedrijf);
         return this.http.post('/bedrijf/register', bedrijf);
     }
  

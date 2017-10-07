@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map'
 export class AuthenticationService {
     constructor(private http: Http) { }
  
+    //hier aanpassen voor de rechten? user.token
     login(username: string, password: string) {
         return this.http.post('/users/authenticate', { username: username, password: password })
             .map((response: Response) => {

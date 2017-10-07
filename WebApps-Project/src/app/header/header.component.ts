@@ -15,12 +15,15 @@ import { BedrijfService } from '../_services/bedrijf.service';
     templateUrl: 'header.component.html'
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
     currentUser: User;
-    bedrijf: Bedrijf;
+    bedrijf: Bedrijf = new Bedrijf("","",undefined);
     constructor(private userService: UserService,private bedrijfService: BedrijfService,private alertService: AlertService) {
+    }
+
+    ngOnInit(){
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if(this.currentUser!=null)
+        if(this.currentUser)
             this.laadBedrijf();
     }
     private laadBedrijf() {
@@ -33,4 +36,6 @@ export class HeaderComponent {
          }); */
      this.bedrijfService.getById("59d0096c0182fb29d177774f").subscribe((bedrijf) => { this.bedrijf = bedrijf });
  }
+
+    
 }

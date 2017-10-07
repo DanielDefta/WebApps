@@ -10,6 +10,9 @@ router.get('/', getAll);
 router.get('/current', getCurrent);
 router.put('/:_id', update);
 router.delete('/:_id', _delete);
+router.post('/passwordrecover', getByUsername);
+router.post('/checkanswers', checkAnswers);
+router.post('/resetpassword', resetPassword);
  
 module.exports = router;
  
@@ -81,4 +84,44 @@ function _delete(req, res) {
         .catch(function (err) {
             res.status(400).send(err);
         });
+}
+
+function getByUsername(req, res) {
+    userService.getByUsername(req.body.username)
+        .then(function (user) {
+            if(user){
+                res.send(user);
+            }
+            else{
+                res.status(400).send('Username bestaat niet');
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
+function checkAnswers(req, res) {
+    userService.checkAnswers(req.body.username, req.body.aantwoordVraag1, req.body.aantwoordVraag2)
+        .then(function (user) {
+            if(user){
+                res.send(user);
+            }
+            else{
+                res.status(400).send('Answers are wrong');
+            }
+        })
+        .catch(function (err) {
+            res.status(400).send(err);
+        });
+}
+
+function resetPassword(req, res){
+    userService.resetPassword(req.body.id, req.body.password)
+    .then(function () {
+        res.sendStatus(200);
+    })
+    .catch(function (err) {
+        res.status(400).send(err);
+    });
 }

@@ -44,6 +44,7 @@ import {MijnprofielComponent} from './mijnProfiel/mijnprofiel.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { PasswordrecoverComponent} from './passwordrecover/passwordrecover.component';
  
 @NgModule({
     imports: [
@@ -61,7 +62,8 @@ import { RegisterComponent } from './register/register.component';
         MijnprofielComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        PasswordrecoverComponent
     ],
     providers: [
         customHttpProvider,
