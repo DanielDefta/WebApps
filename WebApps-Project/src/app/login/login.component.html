@@ -62,7 +62,9 @@
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+                        <input type="{{showPassword?'text':'password'}}" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+                        <input style="padding-top: 10px;display: inline-block;height: auto;margin-top: 6px;" type="checkbox" name="Toggle" ng-model="showPassword" ng-checked="showPassword" (click)="toggleShowPassword()">
+                        <label for="Toggle" style="font-size: 10px;font-weight: normal;position: absolute;padding: 7px 0px 0px 5px;">Show password</label>
                         <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
                     </div>
                     <div class="form-group">

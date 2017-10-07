@@ -12,6 +12,7 @@ import {AuthenticationService} from '../_services/authentication.service';
  
 export class LoginComponent implements OnInit {
     model: any = {};
+    showPassword:boolean=false;
     loading = false;
     returnUrl: string;
  
@@ -42,5 +43,10 @@ export class LoginComponent implements OnInit {
                     this.alertService.error(error);
                     this.loading = false;
                 });
+    }
+
+    toggleShowPassword(){
+        this.showPassword = !this.showPassword;
+        console.log(this.showPassword);
     }
 }
