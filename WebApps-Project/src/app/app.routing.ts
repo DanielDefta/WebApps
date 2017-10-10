@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { WelcomeComponent} from './welcome/welcome.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { MijnprofielComponent} from './mijnProfiel/mijnprofiel.component';
 import { LoginComponent } from './login/login.component';

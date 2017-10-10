@@ -49,7 +49,9 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordrecoverComponent } from './passwordrecover/passwordrecover.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import {EmployeetableComponent} from './admin/employeetable/employeetable.component';
+
  
 @NgModule({
     imports: [
@@ -71,7 +73,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
         LoginComponent,
         RegisterComponent,
         PasswordrecoverComponent,
-        DashboardComponent
+        DashboardComponent,
+        EmployeetableComponent
     ],
     providers: [
         customHttpProvider,

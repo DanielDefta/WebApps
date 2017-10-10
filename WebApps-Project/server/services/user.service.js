@@ -210,6 +210,7 @@ function update(_id, userParam) {
             firstName: userParam.firstName,
             lastName: userParam.lastName,
             username: userParam.username,
+            online: userParam.online
         };
 
         // update password if it was entered

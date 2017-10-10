@@ -4,10 +4,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map'
+
+import { UserService} from "./user.service";
  
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http, private router: Router) { }
+    constructor(private http: Http, private router: Router, private userService:UserService) { }
  
     //hier aanpassen voor de rechten? user.token
     login(username: string, password: string) {
@@ -26,6 +28,9 @@ export class AuthenticationService {
  
     logout() {
         // remove user from local storage to log user out
+        let user = JSON.parse(localStorage.getItem('currentUser'));
+        user.online = false;
+        this.userService.update(user).subscribe();
         localStorage.clear();
     }
 }

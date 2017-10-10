@@ -3,39 +3,10 @@
 
     <div style="background-color: transparent;">
             <div style="margin-top: -19px;"></div>
-        <div class="row" style="margin-left: 245px;">
+        <div class="row marginLeft240">
             <!-- Default -->
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Werknemers
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive" style="max-height:300px; overflow-y: scroll">
-                            <table class="table" >
-                                <thead >
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                        <th>Functie</th>
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    <tr *ngFor="let user of users; let i = index" class="{{user.roles.includes('ADMIN')?'info':'warning'}}">
-                                        <td>{{i+1}}</td>
-                                        <td>{{user.firstName}}</td>
-                                        <td>{{user.lastName}}</td>
-                                        <td>{{user.username}}</td>
-                                        <td>{{user.roles}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--Employee table-->
+            <app-employeetable></app-employeetable>
             <!-- Info -->
             <div class="col-lg-4">
                 <div class="panel panel-info">
@@ -51,9 +22,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row" style="margin-left: 245px;">
+        <!--</div>
+ 
+        <div class="row marginLeft240"> -->
 
             <!-- Collapsible  =>als ik da in een aparte component maak kan ik de timer subscription stoppen en een refresh button maken-->
             <div class="col-lg-4">
@@ -64,7 +35,7 @@
                     <!-- .panel-heading -->
                     <div class="panel-body">
                         <div class="panel-group" id="accordion">
-                            <div *ngFor="let user of users; let i = index" class="panel panel-default">
+                            <!-- <div *ngFor="let user of users; let i = index" class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="false" class="collapsed">{{user.firstName}} {{user.lastName}}</a>
@@ -75,7 +46,7 @@
                                         <p>blabla</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <!-- .panel-body -->
@@ -96,7 +67,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        <!-- </div> -->
     </div>
 </div>
 
@@ -107,8 +78,8 @@
 
 <style>
     @media (min-width: 768px) {
-        .marginLeft250 {
-            margin-left: 250px;
+        .marginLeft240 {
+            margin-left: 240px;
         }
     }
 </style>

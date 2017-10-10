@@ -28,10 +28,15 @@ export class HomeComponent implements OnInit {
 
     constructor(private permissionsService: NgxPermissionsService, private userService: UserService, private bedrijfService: BedrijfService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser.online = true;
+        this.userService.update(this.currentUser).subscribe();
     }
 
     ngOnInit() {
         this.loadAllUsers();
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser.online = true;
+        this.userService.update(this.currentUser).subscribe();
     }
 
     deleteUser(_id: string) {

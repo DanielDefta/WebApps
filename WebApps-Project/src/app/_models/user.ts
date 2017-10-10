@@ -13,6 +13,7 @@ export class User {
     aantwoordVraag2: string;
     locatie: Locatie;
     roles: string[];
+    online: boolean;
 
     constructor(
         username: string,
