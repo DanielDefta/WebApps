@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+
+import {AuthenticationService} from '../_services/authentication.service';
+
 import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 
@@ -18,7 +21,10 @@ import { BedrijfService } from '../_services/bedrijf.service';
 export class HeaderComponent implements OnInit {
     currentUser: User;
     bedrijf: Bedrijf = new Bedrijf("","",undefined);
-    constructor(private userService: UserService,private bedrijfService: BedrijfService,private alertService: AlertService) {
+    constructor(private userService: UserService,
+        private bedrijfService: BedrijfService,
+        private alertService: AlertService, 
+        private authenticationService: AuthenticationService) {
     }
 
     ngOnInit(){
@@ -36,6 +42,10 @@ export class HeaderComponent implements OnInit {
          }); */
      this.bedrijfService.getById("59d0096c0182fb29d177774f").subscribe((bedrijf) => { this.bedrijf = bedrijf });
  }
+
+    logout(){
+        this.authenticationService.logout();
+    }
 
     
 }

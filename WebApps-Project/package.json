@@ -30,7 +30,8 @@
     "ngx-bootstrap": "^1.9.3",
     "zone.js": "^0.8.14",
     "rxjs": "^5.2.0",
-    "systemjs": "^0.19.47"
+    "systemjs": "^0.19.47",
+    "ngx-permissions": "^2.1.1"
   },
   "devDependencies": {
     "@angular/cli": "1.4.3",

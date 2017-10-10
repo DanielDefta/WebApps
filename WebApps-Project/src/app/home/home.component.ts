@@ -1,15 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
+import { NgxPermissionsService } from 'ngx-permissions';
+
 import { User } from '../_models/user';
 import { Bedrijf } from '../_models/bedrijf';
 import { Locatie } from '../_models/locatie';
 import { UserService } from '../_services/user.service';
 import { BedrijfService } from '../_services/bedrijf.service';
 
+import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
+
 @Component({
     moduleId: module.id,
-    templateUrl: 'home.component.html'
+    templateUrl: 'home.component.html',
+
+    animations:[slideInOutAnimation],
+    
+        host: { '[@slideInOutAnimation]':''}
 })
 
 export class HomeComponent implements OnInit {
@@ -18,7 +26,7 @@ export class HomeComponent implements OnInit {
     timerSubscription;
     //bedrijf: Bedrijf = new Bedrijf("", "", new Locatie("", "", 10, "", ""));;
 
-    constructor(private userService: UserService, private bedrijfService: BedrijfService) {
+    constructor(private permissionsService: NgxPermissionsService, private userService: UserService, private bedrijfService: BedrijfService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 

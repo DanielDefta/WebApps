@@ -28,6 +28,10 @@ import { HttpModule } from '@angular/http';
  
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
+
+import { NgxPermissionsModule} from 'ngx-permissions';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  
 import { customHttpProvider } from './_helpers/custom-http';
 import { AlertComponent } from './_directives/alert.component';
@@ -37,21 +41,24 @@ import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { BedrijfService } from './_services/bedrijf.service';
 
-import {HeaderComponent} from './header/header.component';
-import {WelcomeheaderComponent} from './header/welcomeheader.component';
-import {WelcomeComponent} from './welcome/welcome.component';
-import {MijnprofielComponent} from './mijnProfiel/mijnprofiel.component';
+import { HeaderComponent } from './header/header.component';
+import { WelcomeheaderComponent } from './header/welcomeheader.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { MijnprofielComponent } from './mijnProfiel/mijnprofiel.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { PasswordrecoverComponent} from './passwordrecover/passwordrecover.component';
+import { PasswordrecoverComponent } from './passwordrecover/passwordrecover.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
  
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        routing
+        routing,
+        NgxPermissionsModule.forRoot(),
+        BrowserAnimationsModule
     ],
     declarations: [
         AppComponent,
@@ -63,7 +70,8 @@ import { PasswordrecoverComponent} from './passwordrecover/passwordrecover.compo
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        PasswordrecoverComponent
+        PasswordrecoverComponent,
+        DashboardComponent
     ],
     providers: [
         customHttpProvider,

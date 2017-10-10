@@ -4,9 +4,16 @@ import {Observable} from 'rxjs/Rx';
 import { User } from '../_models/user';
 import { UserService } from '../_services/user.service';
 
+
+import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
+
 @Component({
-   moduleId: module.id,
-   templateUrl: 'mijnprofiel.component.html'
+    moduleId: module.id,
+    templateUrl: 'mijnprofiel.component.html',
+
+    animations:[slideInOutAnimation],
+   
+    host: { '[@slideInOutAnimation]':''}
 })
 
 export class MijnprofielComponent implements OnInit {

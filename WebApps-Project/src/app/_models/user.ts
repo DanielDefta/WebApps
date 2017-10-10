@@ -12,6 +12,7 @@ export class User {
     veiligheidsVraag2: string;
     aantwoordVraag2: string;
     locatie: Locatie;
+    roles: string[];
 
     constructor(
         username: string,

@@ -4,10 +4,16 @@ import {UserService} from '../_services/user.service';
 import { AlertService } from '../_services/alert.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
+
 @Component({
 selector: 'app-passwordrecover',
    moduleId: module.id,
-   templateUrl: 'passwordrecover.component.html'
+   templateUrl: 'passwordrecover.component.html',
+   
+   animations:[slideInOutAnimation],
+
+   host: { '[@slideInOutAnimation]':''}
 })
 
 export class PasswordrecoverComponent implements OnInit {

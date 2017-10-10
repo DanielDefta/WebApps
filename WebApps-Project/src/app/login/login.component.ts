@@ -2,12 +2,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
  
+
+import { NgxPermissionsService } from 'ngx-permissions';
 import { AlertService } from '../_services/alert.service';
 import {AuthenticationService} from '../_services/authentication.service';
+
+import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
  
 @Component({
     moduleId: module.id,
-    templateUrl: 'login.component.html'
+    templateUrl: 'login.component.html',
+
+    animations:[slideInOutAnimation],
+
+    host: { '[@slideInOutAnimation]':''}
 })
  
 export class LoginComponent implements OnInit {
@@ -17,6 +25,7 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
  
     constructor(
+        private permissionsService: NgxPermissionsService,
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
@@ -24,7 +33,6 @@ export class LoginComponent implements OnInit {
  
     ngOnInit() {
         // reset login status
-        this.authenticationService.logout();
  
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
