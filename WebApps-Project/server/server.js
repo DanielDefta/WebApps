@@ -5,6 +5,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var config = require('config.json');
+var server = require('http').createServer(app);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,6 +30,6 @@ app.use('/bedrijf', require('./controllers/bedrijf.controller'));
 
 // start server
 var port = process.env.NODE_ENV === 'production' ? 80 : 4000;
-var server = app.listen(port, function () {
+server.listen(port, function () {
     console.log('Server listening on port ' + port);
 });

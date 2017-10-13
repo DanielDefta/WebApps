@@ -9,14 +9,17 @@ import { slideInOutAnimation } from '../../_animations/slide-in-out.animation';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  animations: [slideInOutAnimation],
+ /*  animations: [slideInOutAnimation],
 
-  host: { '[@slideInOutAnimation]': '' }
+  host: { '[@slideInOutAnimation]': '' } */
 
 
 })
 export class DashboardComponent implements OnInit {
   currentUser: User;
+
+  showMainDashboard: boolean = true ;
+  showOtherDashboard: boolean = false;
 
   constructor(private userService: UserService) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -27,5 +30,14 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  showDashboardMain(show: boolean){
+      this.showMainDashboard = !this.showMainDashboard;
+      this.showOtherDashboard = !this.showMainDashboard;
+  }
+  showDashboardOther(show: boolean){
+    this.showOtherDashboard = !this.showOtherDashboard;
+    this.showMainDashboard = !this.showOtherDashboard;
+}
 
 }

@@ -50,6 +50,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordrecoverComponent } from './passwordrecover/passwordrecover.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { MaindashboardComponent} from './admin/dashboard/mainDashboard/maindashboard.component';
 import {EmployeetableComponent} from './admin/employeetable/employeetable.component';
 
  
@@ -74,6 +75,7 @@ import {EmployeetableComponent} from './admin/employeetable/employeetable.compon
         RegisterComponent,
         PasswordrecoverComponent,
         DashboardComponent,
+        MaindashboardComponent,
         EmployeetableComponent
     ],
     providers: [

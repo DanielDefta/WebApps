@@ -1,0 +1,97 @@
+<div class="container" style="width:100%;">
+    
+            <div style="background-color: transparent;">
+                <div style="margin-top: -19px;"></div>
+                <div class="row marginLeft240">
+                    <!-- Default -->
+                    <!--Employee table-->
+                    <app-employeetable></app-employeetable>
+                    <!-- Info -->
+                    <div class="col-lg-4">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                Default Panel
+                            </div>
+                            <div class="panel-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices
+                                    accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                            </div>
+                            <div class="panel-footer">
+                                Panel Footer
+                            </div>
+                        </div>
+                    </div>
+                    <!--</div>
+                     
+                            <div class="row marginLeft240"> -->
+    
+                    <!-- Collapsible  =>als ik da in een aparte component maak kan ik de timer subscription stoppen en een refresh button maken-->
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Werknemers
+                            </div>
+                            <!-- .panel-heading -->
+                            <div class="panel-body">
+                                <div class="panel-group" id="accordion">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" class="collapsed">Klas1</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse1" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                            <div class="panel-body">
+                                                <p>blabla</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" class="collapsed">Klas2</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse2" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                                            <div class="panel-body">
+                                                <p>blabla</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .panel-body -->
+                        </div>
+                    </div>
+                    <!-- Green -->
+                    <div class="col-lg-4">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                Default Panel
+                            </div>
+                            <div class="panel-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices
+                                    accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                            </div>
+                            <div class="panel-footer">
+                                Panel Footer
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+
+        <style>
+            @media (min-width: 768px) {
+                .hoogte100vh {
+                    padding-top: 50px;
+                    margin-top: -100px;
+                    height: 100vh;
+                }
+                .marginLeft240 {
+                    margin-left: 240px;
+                }
+            }
+        </style>

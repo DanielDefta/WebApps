@@ -1,21 +1,6 @@
 <app-header></app-header>
-<ng-template [ngxPermissionsOnly]="['ADMIN']">
-    <div class="container">
-    <div style="width:100%;">
-        
-            <alert></alert>
-        <div class="jumbotron marginLeft240">
-
-            <h1>Hallo {{currentUser.firstName}}!</h1>
-        </div>
-    </div>
-</div>
-</ng-template>
-
-<ng-template [ngxPermissionsExcept]="['ADMIN']">
    <div class="container">
     <div style="width:100%;">
-        
             <alert></alert>
         <div class="jumbotron">
 
@@ -23,7 +8,6 @@
         </div>
     </div>
 </div>
-</ng-template>
 
 <style>
     @media (min-width: 768px) {
