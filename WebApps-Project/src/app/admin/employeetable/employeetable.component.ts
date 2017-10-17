@@ -35,6 +35,7 @@ export class EmployeetableComponent implements OnInit {
         this.subscribeToData();
     }
 
+    //users updaten
     private subscribeToData() {
         this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
     }
@@ -43,6 +44,8 @@ export class EmployeetableComponent implements OnInit {
         this.size = this.size === "col-lg-12" ? "col-lg-8" : "col-lg-12";
     }
 
+
+    //methoden hieronder om te sorteren
     sortByfirstName() {
         this.timerSubscription.unsubscribe();
         this.users = this.users.sort((user1, user2) => {

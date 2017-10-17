@@ -31,6 +31,7 @@ export class CustomHttp extends Http {
  
     // private helper methods
  
+    //jwt token toevoegen zodat we gegevens aan de databank kunnen ophalen alleen als we ingelogd zijn (tenzij anders vermeld in de server.js)
     private addJwt(options?: RequestOptionsArgs): RequestOptionsArgs {
         // ensure request options and headers are not null
         options = options || new RequestOptions();
@@ -45,6 +46,7 @@ export class CustomHttp extends Http {
         return options;
     }
  
+    //als geen authorization error terug geven en naar de login pagina gaan
     private handleError(error: any) {
         if (error.status === 401) {
             // 401 unauthorized response so log user out of client

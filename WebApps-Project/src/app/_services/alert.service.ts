@@ -3,9 +3,13 @@ import { Router, NavigationStart } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
  
+//injectable
+//kan in alle components gezet worden om succes/error bootschappen te tonen
 @Injectable()
 export class AlertService {
     private subject = new Subject<any>();
+
+    //als op true blijft het boodschap op andere pagina's ook
     private keepAfterNavigationChange = false;
  
     constructor(private router: Router) {
@@ -23,11 +27,14 @@ export class AlertService {
         });
     }
  
+    //onderstaande 2 methoden hebben invloed op de css
+    //succes message tonen
     success(message: string, keepAfterNavigationChange = false) {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         this.subject.next({ type: 'success', text: message });
     }
  
+    //error message tonen
     error(message: string, keepAfterNavigationChange = false) {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         this.subject.next({ type: 'error', text: message });

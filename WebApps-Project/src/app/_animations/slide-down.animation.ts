@@ -1,6 +1,7 @@
 // import the required animation functions from the angular animations module
 import { trigger, state, animate, transition, style } from '@angular/animations';
 
+//beter slideDownLeftAnimation genoemd :D
 export const slideDownAnimation =
     // trigger name for attaching this animation to an element using the [@triggerName] syntax
     trigger('slideDownAnimation', [
@@ -18,7 +19,7 @@ export const slideDownAnimation =
 
             // styles at start of transition
             style({
-                // start with the content positioned off the right of the screen, 
+                // start with the content positioned off the top of the screen, 
                 // -400% is required instead of -100% because the negative position adds to the width of the element
                 position: 'fixed',
                 top: '-400%',
@@ -29,7 +30,7 @@ export const slideDownAnimation =
 
             // animation and styles at end of transition
             animate('.5s ease-in-out', style({
-                // transition the right position to 0 which slides the content into view
+                // transition the top position to 0 which slides the content into view
                 top: 0,
 
                 // transition the background opacity to 0.8 to fade it in

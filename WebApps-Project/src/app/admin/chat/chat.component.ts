@@ -45,6 +45,7 @@ export class ChatComponent implements OnInit {
         this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
     }
 
+    //conersatie opladen in funtie van de 2 deelnemende users
     loadConversation(_id:string){
         if(this.messageSubscription) this.messageSubscription.unsubscribe();
         this.disableScrollDown = false;
@@ -72,6 +73,7 @@ export class ChatComponent implements OnInit {
 
     }
 
+    //conversatie updaten
     loadConversationById(_id:string){
         let model:any = {};
         model.userId1 = this.currentConversation.userId1;
@@ -86,11 +88,12 @@ export class ChatComponent implements OnInit {
 
         
 
-
+    //code hieronder werkt goed in chrome maar niet altijd in safari
     ngAfterViewChecked(){
         this.scrollToBottom();
     }
 
+    //wordt aangeroepen bij het scrollen
     private onScroll() {
         let element = this.myScrollContainer.nativeElement
         let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight

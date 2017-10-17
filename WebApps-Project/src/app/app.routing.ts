@@ -10,6 +10,7 @@ import { PasswordrecoverComponent} from './passwordrecover/passwordrecover.compo
 import { AuthGuard } from './_guards/auth.guard';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
+
 const appRoutes: Routes = [
    { path: '', component: WelcomeComponent },
    { path: 'welcome', component: WelcomeComponent },

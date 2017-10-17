@@ -26,7 +26,6 @@ export const slideInOutAnimation =
                 position: 'fixed',
                 right: '-400%',
 
-                // start with background opacity set to 0 (invisible)
                 backgroundColor: 'rgba(0, 0, 0, 0)'
             }),
 
@@ -34,8 +33,7 @@ export const slideInOutAnimation =
             animate('.5s ease-in-out', style({
                 // transition the right position to 0 which slides the content into view
                 right: 0,
-
-                // transition the background opacity to 0.8 to fade it in
+                
                 backgroundColor: 'rgba(0, 0, 0, 0)'
             }))
         ]),

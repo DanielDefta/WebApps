@@ -17,10 +17,14 @@ selector: 'app-passwordrecover',
 })
 
 export class PasswordrecoverComponent implements OnInit {
+    //nodig anders is user undefined..
     model: User = new User("","","","","","","","","",undefined);
+
+    //booleans nodig om de juiste stappen te tonen
     emailIngediend:boolean;
     securityAnswersIngediend:boolean;
     loading:boolean;
+    
     constructor(private userService: UserService,private alertService: AlertService, private route: ActivatedRoute,
         private router: Router,){
     }
@@ -28,6 +32,9 @@ export class PasswordrecoverComponent implements OnInit {
     ngOnInit(){
     }
 
+    //email sturen om te kijken of er een user bestaat met deze email
+    //indien ja een aantal gegevens terug sturen zoals de beveiliginsvragen
+    //verder gaan naar de volgonde stap -> beveiliginsvragen tonen
     sendEmail(){
         this.loading = true;
         this.userService.getByUsername(this.model).subscribe(
@@ -43,6 +50,8 @@ export class PasswordrecoverComponent implements OnInit {
             });
     }
 
+    //aantwoorden op de beveiliginsvragen sturen
+    //indien juist verder gaan naar de volgonde stap -> wachtwoord resetten
     sendSecurityAnswers(){
         this.loading = true;
         this.userService.sendSecurityAnswers(this.model).subscribe(
@@ -58,6 +67,7 @@ export class PasswordrecoverComponent implements OnInit {
             });
     }
 
+    //wachtwoord resetten
     resetPassword(){
         this.loading = true;
         this.userService.resetPassword(this.model._id, this.model.password).subscribe(

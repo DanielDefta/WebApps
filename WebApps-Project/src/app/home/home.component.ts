@@ -39,17 +39,21 @@ export class HomeComponent implements OnInit {
         this.userService.update(this.currentUser).subscribe();
     }
 
+
+    //deze methode moet weg
     deleteUser(_id: string) {
         console.log(_id);
         this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
         this.loadAllUsers();
     }
 
+    //deze methode moet weg
     private loadAllUsers() {
         this.userService.getAll().subscribe(users => { this.users = users; });
         this.subscribeToData();
     }
 
+    //deze methode moet weg
     private subscribeToData() {
         this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
     }

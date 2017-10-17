@@ -11,7 +11,9 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
  
-// use JWT auth to secure the api, the token can be passed in the authorization header or querystring
+//JWT aut gebruiken om te applicatie te beveiligen, moet doorgegeven worden in de header bij een request => custom-http zorgt dat dat gebeurd
+//staandaar gebruiken alle routes die gegevens vragen aan databank een authorization 
+//=> unless method (zorgt dat we toch bepaalde dingen kunnen sturen / opvragen => inloggen, registreren, password resetten enz)
 app.use(expressJwt({
     secret: config.secret,
     getToken: function (req) {

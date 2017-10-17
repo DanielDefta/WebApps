@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  //hieronder methoden om van "pagina" te veranderen
   showDashboardMain(show: boolean){
       this.showMainDashboard = !this.showMainDashboard;
       this.showOtherDashboard = !this.showMainDashboard;

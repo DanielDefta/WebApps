@@ -15,10 +15,10 @@ export class AuthenticationService {
     login(username: string, password: string) {
         return this.http.post('/users/authenticate', { username: username, password: password })
             .map((response: Response) => {
-                // login successful if there's a jwt token in the response
+                //login in gelukt als er een jwt token is in de response
                 let user = response.json();
                 if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    //user en de token opslaan in local storage om ingelogd te blijven
                     localStorage.setItem('currentUser', JSON.stringify(user));
                 }
  
