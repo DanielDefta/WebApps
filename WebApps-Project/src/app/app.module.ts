@@ -40,6 +40,7 @@ import { AlertService } from './_services/alert.service';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { BedrijfService } from './_services/bedrijf.service';
+import { ConversationService} from './_services/conversation.service';
 
 import { HeaderComponent } from './header/header.component';
 import { WelcomeheaderComponent } from './header/welcomeheader.component';
@@ -52,7 +53,7 @@ import { PasswordrecoverComponent } from './passwordrecover/passwordrecover.comp
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MaindashboardComponent} from './admin/dashboard/mainDashboard/maindashboard.component';
 import {EmployeetableComponent} from './admin/employeetable/employeetable.component';
-
+import { ChatComponent } from './admin/chat/chat.component';
  
 @NgModule({
     imports: [
@@ -76,7 +77,8 @@ import {EmployeetableComponent} from './admin/employeetable/employeetable.compon
         PasswordrecoverComponent,
         DashboardComponent,
         MaindashboardComponent,
-        EmployeetableComponent
+        EmployeetableComponent,
+        ChatComponent
     ],
     providers: [
         customHttpProvider,
@@ -84,7 +86,8 @@ import {EmployeetableComponent} from './admin/employeetable/employeetable.compon
         AlertService,
         AuthenticationService,
         UserService,
-        BedrijfService
+        BedrijfService,
+        ConversationService
     ],
     bootstrap: [AppComponent]
 })

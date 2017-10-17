@@ -35,7 +35,7 @@ function authenticate(username, password) {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 roles:user.roles,
-                token: jwt.sign({ sub: user._id }, config.secret)//, {expiresIn:'2s'}) error in de klassen jsonwebtoken/index.js:155:18
+                token: jwt.sign({ sub: user._id }, config.secret)//, {expiresIn:'20s'}) //error in de klassen jsonwebtoken/index.js:155:18
             });
         } else {
             // authentication failed
