@@ -10,7 +10,7 @@ import { NgxPermissionsModule} from 'ngx-permissions';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
  
-import { customHttpProvider } from './_helpers/custom-http';
+//import { customHttpProvider } from './_helpers/custom-http';
 import { AlertComponent } from './_directives/alert.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AlertService } from './_services/alert.service';
@@ -58,7 +58,7 @@ import { ChatComponent } from './admin/chat/chat.component';
         ChatComponent
     ],
     providers: [
-        customHttpProvider,
+        //customHttpProvider,
         AuthGuard,
         AlertService,
         AuthenticationService,

@@ -8,8 +8,8 @@ export class UserService {
     isDev:boolean;
 
     constructor(private http: Http) { 
-        this.isDev=false; //bij development
-        //this.isDev=true; //bij deployen
+        this.isDev=false; //bij deployen
+        //this.isDev=true; //bij development
     }
  
     getAll() {
