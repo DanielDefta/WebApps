@@ -1,7 +1,7 @@
-var config = require('config.json');
+
 var express = require('express');
 var router = express.Router();
-var conversationService = require('services/conversation.service');
+var conversationService = require('../services/conversation.service');
  
 // routes
 router.post('/getbyusers', getByUsers);

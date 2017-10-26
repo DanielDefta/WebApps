@@ -1,7 +1,7 @@
-var config = require('config.json');
+
 var express = require('express');
 var router = express.Router();
-var bedrijfService = require('services/bedrijf.service');
+var bedrijfService = require('../services/bedrijf.service');
  
 // routes
 router.post('/register', register);
