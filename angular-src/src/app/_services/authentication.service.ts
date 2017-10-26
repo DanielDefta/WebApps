@@ -1,16 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import {tokenNotExpired} from 'angular2-jwt';
 
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map'
 
 import { UserService} from "./user.service";
+import {NgxPermissionsService} from 'ngx-permissions';
  
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: Http, private router: Router, private userService:UserService) { }
- 
+    authToken: any;
+    user: any;
+  
+    constructor(private http:Http,private router: Router, private userService:UserService,private permissionsService: NgxPermissionsService) {
+    }
+
     //hier aanpassen voor de rechten? user.token
     login(username: string, password: string) {
         return this.http.post('/users/authenticate', { username: username, password: password })
@@ -19,18 +26,38 @@ export class AuthenticationService {
                 let user = response.json();
                 if (user && user.token) {
                     //user en de token opslaan in local storage om ingelogd te blijven
-                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    this.storeUserData(user.token, user);
+                    console.log("ingelogd");
                 }
- 
                 return user;
             });
     }
- 
+
     logout() {
         // remove user from local storage to log user out
         let user = JSON.parse(localStorage.getItem('currentUser'));
         user.online = false;
         this.userService.update(user).subscribe();
+        this.authToken = null;
+        this.user = null;
         localStorage.clear();
     }
+    
+      storeUserData(token, user){
+        localStorage.setItem('id_token', token);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.authToken = token;
+        this.user = user;
+      }
+    
+      loadToken(){
+        const token = localStorage.getItem('id_token');
+        this.authToken = token;
+      }
+    
+      loggedIn(){
+        const perm = JSON.parse(localStorage.getItem('currentUser')).roles;
+        this.permissionsService.addPermission(perm);
+        return tokenNotExpired();
+      }
 }

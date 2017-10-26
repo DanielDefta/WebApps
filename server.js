@@ -27,7 +27,7 @@ const bedrijf = require('./controllers/bedrijf.controller');
 const conversation = require('./controllers/conversation.controller');
 
 // Port Number
-const port =process.env.PORT || 8080;
+const port =4000;//process.env.PORT || 8080;
 
 // CORS Middleware
 app.use(cors());
