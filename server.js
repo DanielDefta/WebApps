@@ -26,8 +26,9 @@ const users = require('./controllers/users.controller');
 const bedrijf = require('./controllers/bedrijf.controller');
 const conversation = require('./controllers/conversation.controller');
 
-// Port Number
-const port =4000;//process.env.PORT || 8080;
+// Port Number: 1ste is voor development 2de voor prod en deployment
+//const port =4000;
+const port = process.env.PORT || 8080;
 
 // CORS Middleware
 app.use(cors());
