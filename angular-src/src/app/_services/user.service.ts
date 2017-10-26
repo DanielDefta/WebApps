@@ -50,5 +50,5 @@ export class UserService {
         } else {
           return 'https://projectwebappsdaniel.herokuapp.com'+ep;
         }
-      }
+    }
 }

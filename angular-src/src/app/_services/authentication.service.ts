@@ -57,8 +57,10 @@ export class AuthenticationService {
       }
     
       loggedIn(){
-        const perm = JSON.parse(localStorage.getItem('currentUser')).roles;
-        this.permissionsService.addPermission(perm);
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if(user) {
+          this.permissionsService.addPermission(user.perm);
+        }
         return tokenNotExpired();
       }
 

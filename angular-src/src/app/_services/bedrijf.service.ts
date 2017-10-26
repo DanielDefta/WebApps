@@ -38,5 +38,5 @@ export class BedrijfService {
         } else {
           return 'https://projectwebappsdaniel.herokuapp.com'+ep;
         }
-      }
+    }
 }
