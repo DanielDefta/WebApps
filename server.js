@@ -31,6 +31,10 @@ app.use('/users', require('./controllers/users.controller'));
 app.use('/bedrijf', require('./controllers/bedrijf.controller'));
 app.use('/conversation', require('./controllers/conversation.controller'));
 
+app.get('/', (req, res) => {
+    res.send('Invalid Endpoint');
+  });
+  
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public/index.html'));
   });
