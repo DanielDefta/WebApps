@@ -32,7 +32,7 @@ app.use('/bedrijf', require('./controllers/bedrijf.controller'));
 app.use('/conversation', require('./controllers/conversation.controller'));
 
 // start server
-var port = process.env.NODE_ENV === 'production' ? 80 : 4000;
+var port = process.env.PORT || 8080;
 server.listen(port, function () {
     console.log('Server listening on port ' + port);
 });
