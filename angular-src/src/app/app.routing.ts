@@ -24,8 +24,8 @@ const appRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, NgxPermissionsGuard],
     data:{
         permissions: {
-            only: 'ADMIN',
-            redirectTo: 'home'
+            only: ['ADMIN'],
+            redirectTo: 'login'
         }
     }},
    { path: 'login', component: LoginComponent },

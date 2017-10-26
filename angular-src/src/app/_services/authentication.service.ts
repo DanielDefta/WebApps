@@ -48,6 +48,7 @@ export class AuthenticationService {
       storeUserData(token, user){
         localStorage.setItem('id_token', token);
         localStorage.setItem('currentUser', JSON.stringify(user));
+        this.permissionsService.addPermission(user.perm);
         this.authToken = token;
         this.user = user;
       }
@@ -59,7 +60,7 @@ export class AuthenticationService {
     
       loggedIn(){
         const user = JSON.parse(localStorage.getItem('currentUser'));
-        if(user) {
+        if(user){
           this.permissionsService.addPermission(user.perm);
         }
         return tokenNotExpired();
