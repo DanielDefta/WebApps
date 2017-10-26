@@ -29,7 +29,6 @@ export class AuthenticationService {
                 if (user && user.token) {
                     //user en de token opslaan in local storage om ingelogd te blijven
                     this.storeUserData(user.token, user);
-                    console.log("ingelogd");
                 }
                 return user;
             });
@@ -65,9 +64,9 @@ export class AuthenticationService {
 
       prepEndpoint(ep){
         if(this.isDev){
-          return ep;
+          return 'http://localhost:4000'+ep;
         } else {
-          return 'http://localhost:8080/'+ep;
+          return 'http://localhost:8080'+ep;
         }
       }
 }

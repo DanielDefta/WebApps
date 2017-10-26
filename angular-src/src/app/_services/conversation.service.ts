@@ -29,9 +29,9 @@ export class ConversationService {
 
     prepEndpoint(ep){
         if(this.isDev){
-          return ep;
+            return 'http://localhost:4000'+ep;
         } else {
-          return 'http://localhost:8080/'+ep;
+          return 'http://localhost:8080'+ep;
         }
       }
 }
