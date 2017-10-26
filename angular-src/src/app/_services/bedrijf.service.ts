@@ -5,25 +5,38 @@ import { Bedrijf } from '../_models/bedrijf';
  
 @Injectable()
 export class BedrijfService {
-    constructor(private http: Http) { }
+    isDev:boolean;
+
+    constructor(private http: Http) { 
+        this.isDev=false; //bij development
+        //this.isDev=true; //bij deployen
+    }
  
     getAll() {
-        return this.http.get('/bedrijf').map((response: Response) => response.json());
+        return this.http.get(this.prepEndpoint('/bedrijf')).map((response: Response) => response.json());
     }
  
     getById(_id: string) {
-        return this.http.get('/bedrijf/' + _id).map((response: Response) => response.json());
+        return this.http.get(this.prepEndpoint('/bedrijf/' + _id)).map((response: Response) => response.json());
     }
  
     create(bedrijf: Bedrijf) {
-        return this.http.post('/bedrijf/register', bedrijf);
+        return this.http.post(this.prepEndpoint('/bedrijf/register'), bedrijf);
     }
  
     update(bedrijf: Bedrijf) {
-        return this.http.put('/bedrijf/' + bedrijf._id, bedrijf);
+        return this.http.put(this.prepEndpoint('/bedrijf/' + bedrijf._id), bedrijf);
     }
  
     delete(_id: string) {
-        return this.http.delete('/bedrijf/' + _id);
+        return this.http.delete(this.prepEndpoint('/bedrijf/' + _id));
     }
+
+    prepEndpoint(ep){
+        if(this.isDev){
+          return ep;
+        } else {
+          return 'http://localhost:8080/'+ep;
+        }
+      }
 }

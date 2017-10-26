@@ -14,13 +14,15 @@ import {NgxPermissionsService} from 'ngx-permissions';
 export class AuthenticationService {
     authToken: any;
     user: any;
-  
+    isDev:boolean;
     constructor(private http:Http,private router: Router, private userService:UserService,private permissionsService: NgxPermissionsService) {
+        this.isDev=false; //bij development
+        //this.isDev=true; //bij deployen
     }
 
     //hier aanpassen voor de rechten? user.token
     login(username: string, password: string) {
-        return this.http.post('/users/authenticate', { username: username, password: password })
+        return this.http.post(this.prepEndpoint('/users/authenticate'), { username: username, password: password })
             .map((response: Response) => {
                 //login in gelukt als er een jwt token is in de response
                 let user = response.json();
@@ -59,5 +61,13 @@ export class AuthenticationService {
         const perm = JSON.parse(localStorage.getItem('currentUser')).roles;
         this.permissionsService.addPermission(perm);
         return tokenNotExpired();
+      }
+
+      prepEndpoint(ep){
+        if(this.isDev){
+          return ep;
+        } else {
+          return 'http://localhost:8080/'+ep;
+        }
       }
 }

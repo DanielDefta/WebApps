@@ -5,20 +5,33 @@ import {Conversatie} from '../_models/conversatie';
  
 @Injectable()
 export class ConversationService {
-    constructor(private http: Http) { }
+    isDev:boolean;
+
+    constructor(private http: Http) { 
+        this.isDev=false; //bij development
+        //this.isDev=true; //bij deployen
+    }
  
     create(conversatie: Conversatie){
-        return this.http.post('/conversation/create',conversatie);
+        return this.http.post(this.prepEndpoint('/conversation/create'),conversatie);
     }
 
     getById(_id: string) {
-        return this.http.get('/conversation/' + _id).map((response: Response) => response.json());
+        return this.http.get(this.prepEndpoint('/conversation/' + _id)).map((response: Response) => response.json());
     }
     getByUsers(model:any) {
-        return this.http.post('/conversation/getbyusers',model).map((response: Response) => response.json());
+        return this.http.post(this.prepEndpoint('/conversation/getbyusers'),model).map((response: Response) => response.json());
     }
 
     update(conversatie: Conversatie){
-        return this.http.put('/conversation/' + conversatie._id, conversatie);
+        return this.http.put(this.prepEndpoint('/conversation/' + conversatie._id), conversatie);
     }
+
+    prepEndpoint(ep){
+        if(this.isDev){
+          return ep;
+        } else {
+          return 'http://localhost:8080/'+ep;
+        }
+      }
 }
