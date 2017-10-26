@@ -29,7 +29,7 @@ export class AuthenticationService {
                 if (user && user.token) {
                     //user en de token opslaan in local storage om ingelogd te blijven
                     this.storeUserData(user.token, user);
-                    this.permissionsService.addPermission(user.perm);
+                    //this.permissionsService.addPermission(user.perm);
                 }
                 return user;
             });
