@@ -8,14 +8,13 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map'
 
 import { UserService} from "./user.service";
-import {NgxPermissionsService} from 'ngx-permissions';
  
 @Injectable()
 export class AuthenticationService {
     authToken: any;
     user: any;
     isDev:boolean;
-    constructor(private http:Http,private router: Router, private userService:UserService,private permissionsService: NgxPermissionsService) {
+    constructor(private http:Http,private router: Router, private userService:UserService) {
         this.isDev=false; //bij deployen
         //this.isDev=true; //bij development
     }
@@ -29,7 +28,6 @@ export class AuthenticationService {
                 if (user && user.token) {
                     //user en de token opslaan in local storage om ingelogd te blijven
                     this.storeUserData(user.token, user);
-                    //this.permissionsService.addPermission(user.perm);
                 }
                 return user;
             });
@@ -48,7 +46,6 @@ export class AuthenticationService {
       storeUserData(token, user){
         localStorage.setItem('id_token', token);
         localStorage.setItem('currentUser', JSON.stringify(user));
-        this.permissionsService.addPermission(user.perm);
         this.authToken = token;
         this.user = user;
       }
@@ -59,10 +56,6 @@ export class AuthenticationService {
       }
     
       loggedIn(){
-        const user = JSON.parse(localStorage.getItem('currentUser'));
-        if(user){
-          this.permissionsService.addPermission(user.perm);
-        }
         return tokenNotExpired();
       }
 

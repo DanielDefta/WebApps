@@ -25,7 +25,7 @@ const appRoutes: Routes = [
     data:{
         permissions: {
             only: ['ADMIN'],
-            redirectTo: 'login'
+            redirectTo: 'home'
         }
     }},
    { path: 'login', component: LoginComponent },
