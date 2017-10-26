@@ -48,7 +48,7 @@ export class UserService {
         if(this.isDev){
             return 'http://localhost:4000'+ep;
         } else {
-          return 'http://localhost:8080'+ep;
+          return 'https://projectwebappsdaniel.herokuapp.com'+ep;
         }
       }
 }
