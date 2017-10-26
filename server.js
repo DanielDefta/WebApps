@@ -31,6 +31,9 @@ app.use('/users', require('./controllers/users.controller'));
 app.use('/bedrijf', require('./controllers/bedrijf.controller'));
 app.use('/conversation', require('./controllers/conversation.controller'));
 
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/index.html'));
+  });
 // start server
 var port = process.env.PORT || 8080;
 server.listen(port, function () {
