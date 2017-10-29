@@ -35,7 +35,7 @@ export class ChatComponent implements OnInit {
         this.loadAllUsers();
         this.socketService.on('message-received', (msg: any) => {
             if(this.currentConversation != undefined){
-                if(msg.van === this.currentConversation.userId2 || msg.van === this.currentConversation.userId2)
+                if(msg.naar === this.currentConversation.userId2 || msg.naar === this.currentConversation.userId2)
                 this.currentConversation.berichten.push(msg);
             }
           });
