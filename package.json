@@ -43,6 +43,7 @@
     "zone.js": "^0.8.14",
     "mongoose": "*",
     "passport": "*",
-    "passport-jwt": "*"
+    "passport-jwt": "*",
+    "socket.io": "^2.0.4"
   }
 }

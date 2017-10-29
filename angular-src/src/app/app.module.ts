@@ -18,6 +18,7 @@ import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { BedrijfService } from './_services/bedrijf.service';
 import { ConversationService} from './_services/conversation.service';
+import { SocketService} from './_services/socket.service';
 
 import { HeaderComponent } from './header/header.component';
 import { WelcomeheaderComponent } from './header/welcomeheader.component';
@@ -64,7 +65,8 @@ import { ChatComponent } from './admin/chat/chat.component';
         AuthenticationService,
         UserService,
         BedrijfService,
-        ConversationService
+        ConversationService,
+        SocketService
     ],
     bootstrap: [AppComponent]
 })

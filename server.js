@@ -7,6 +7,7 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 
+
 // Connect To Database
 mongoose.connect(config.database);
 
@@ -21,6 +22,8 @@ mongoose.connection.on('error', (err) => {
 });
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 const users = require('./controllers/users.controller');
 const bedrijf = require('./controllers/bedrijf.controller');
@@ -58,8 +61,25 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
+
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+
+
+   // Test Messages
+  socket.on('send-message', (data) => {
+    socket.broadcast.emit('message-received', data);
+  });
+
+});
+
+
+
 // Start Server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(__dirname);
   console.log('Server started on port '+port);
 });

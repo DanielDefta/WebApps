@@ -7,6 +7,7 @@ import { Conversatie} from '../../_models/conversatie';
 import { Bericht } from '../../_models/bericht';
 import { UserService } from '../../_services/user.service';
 import { ConversationService} from '../../_services/conversation.service';
+import { SocketService } from '../../_services/socket.service';
 
 @Component({
     selector: 'app-chat',
@@ -26,13 +27,18 @@ export class ChatComponent implements OnInit {
     timerSubscription;
     messageSubscription;
 
-    constructor(private userService : UserService, private conversationService:ConversationService){
+    constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService){
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
     ngOnInit() {
         this.loadAllUsers();
-
+        this.socketService.on('message-received', (msg: any) => {
+            if(this.currentConversation != undefined){
+                if(msg.van === this.currentConversation.userId2 || msg.van === this.currentConversation.userId2)
+                this.currentConversation.berichten.push(msg);
+            }
+          });
     }
 
     private loadAllUsers() {
@@ -45,7 +51,7 @@ export class ChatComponent implements OnInit {
         this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
     }
 
-    //conersatie opladen in funtie van de 2 deelnemende users
+    //conersatie opladen in funtie van de 2 deelnemende users (parameter _id is de id van de ontvanger, de id van de huidige user wordt genomen van de currentUser)
     loadConversation(_id:string){
         if(this.messageSubscription) this.messageSubscription.unsubscribe();
         this.disableScrollDown = false;
@@ -56,7 +62,6 @@ export class ChatComponent implements OnInit {
         this.conversationService.getByUsers(model).subscribe(
             data => {
                 this.currentConversation = data;
-                this.loadConversationById(data._id);
             },
             error =>{
                 this.conversationService.create(new Conversatie(this.currentUser,this.users.find(user => user._id===_id))).subscribe();
@@ -64,26 +69,19 @@ export class ChatComponent implements OnInit {
             });
     }
 
+    //hier kan nog een methode komen als de user op de textbox drukt => "aan het typen" sturen via socket.io aan de andere user
+
+    //hier kan nog een methode komen als de user het bericht leest
+
+
+    //deze methode vervolledigen met socket.io => DONE
     message:string= "";
     sendMessage(){
         this.currentConversation.berichten.push(new Bericht(this.currentUser._id,this.currentConversation.userId1==this.currentUser._id?this.currentConversation.userId2:this.currentConversation.userId1,this.message));
         this.message="";
         this.conversationService.update(this.currentConversation).subscribe();
-        this.loadConversationById(this.currentConversation._id);
+        this.socketService.emit('send-message', this.currentConversation.berichten[this.currentConversation.berichten.length-1]);
 
-    }
-
-    //conversatie updaten
-    loadConversationById(_id:string){
-        let model:any = {};
-        model.userId1 = this.currentConversation.userId1;
-        model.userId2 = this.currentConversation.userId2;
-        this.conversationService.getByUsers(model).subscribe(
-            data => {
-                this.currentConversation=data;
-                this.messageSubscription = Observable.timer(2000).first().subscribe(() => this.loadConversationById(data._id))
-            }
-        );
     }
 
         
