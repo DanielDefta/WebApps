@@ -9,6 +9,8 @@ import { UserService } from '../../_services/user.service';
 import { ConversationService} from '../../_services/conversation.service';
 import { SocketService } from '../../_services/socket.service';
 
+import { PushNotificationsService} from 'angular2-notifications';
+
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html'
@@ -27,13 +29,23 @@ export class ChatComponent implements OnInit {
     timerSubscription;
     messageSubscription;
 
-    constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService){
+    constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService, private pushNotification : PushNotificationsService){
+        this.pushNotification.requestPermission();
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
     ngOnInit() {
         this.loadAllUsers();
         this.socketService.on('message-received', (msg: any) => {
+            if(msg.naar === this.currentUser._id){
+                let options = { //set options
+                    body: msg.message,
+                    icon: "assets/user.png",
+                    vibrate: [200,100,200]
+                  }
+                let naam = this.users.find(u=>u._id===msg.van).firstName + this.users.find(u=>u._id===msg.van).lastName;
+                this.pushNotification.create('New message from '+ naam, options).subscribe();
+            }
             if(this.currentConversation != undefined){
                 if(msg.van === this.currentConversation.userId1 || msg.van === this.currentConversation.userId2)
                 this.currentConversation.berichten.push(msg);
