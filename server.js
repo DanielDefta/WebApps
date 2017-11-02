@@ -28,6 +28,7 @@ const io = require('socket.io')(server);
 const users = require('./controllers/users.controller');
 const bedrijf = require('./controllers/bedrijf.controller');
 const conversation = require('./controllers/conversation.controller');
+const producten = require('./controllers/product.controller');
 
 // Port Number: 1ste is voor development 2de voor prod en deployment
 //const port =4000;
@@ -51,6 +52,7 @@ require('./config/passport')(passport);
 app.use('/users', users);
 app.use('/bedrijf', bedrijf);
 app.use('/conversation',conversation);
+app.use('/product', producten);
 
 // Index Route
 app.get('/', (req, res) => {
@@ -61,13 +63,34 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-
 io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
 
+  socket.on('disconnect', function(){
+    //hier gaan we de user offline zetten in de databank
+    //pretty ugly code :)))
+    var config = require('./config/database');
+    var _ = require('lodash');
+    var Q = require('q');
+    var mongo = require('mongoskin');
+    var db = mongo.db(config.database, { native_parser: true });
+    db.bind('users');
+
+    var deferred = Q.defer();
+    var set = {
+      online: false
+    };
+    db.users.update(
+      { _id: mongo.helper.toObjectID(socket.client.id) },
+      { $set: set },
+      function (err, doc) {
+        if (err) deferred.reject(err.name + ': ' + err.message);
+          deferred.resolve();
+      });
+  });
+  socket.on('online', (data)=>{
+    //hier gaan we de user online zetten in de databank
+    socket.client.id = data;
+  })
 
    // Test Messages
   socket.on('send-message', (data) => {

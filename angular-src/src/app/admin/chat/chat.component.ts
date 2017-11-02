@@ -59,6 +59,7 @@ export class ChatComponent implements OnInit {
         this.subscribeToData();
     }
 
+    //users updaten => da verwijderen en alleen als een user registreert dan toevoegen => socket.io
     private subscribeToData() {
         this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
     }

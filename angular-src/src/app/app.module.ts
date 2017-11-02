@@ -19,7 +19,10 @@ import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 import { BedrijfService } from './_services/bedrijf.service';
 import { ConversationService} from './_services/conversation.service';
+import { ProductService} from './_services/product.service';
 import { SocketService} from './_services/socket.service';
+
+import { OrderService} from './_services/order.service';
 
 import { HeaderComponent } from './header/header.component';
 import { WelcomeheaderComponent } from './header/welcomeheader.component';
@@ -33,6 +36,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { MaindashboardComponent} from './admin/dashboard/mainDashboard/maindashboard.component';
 import {EmployeetableComponent} from './admin/employeetable/employeetable.component';
 import { ChatComponent } from './admin/chat/chat.component';
+import { ShoppingbagComponent} from './shop/shoppingbag.component';
  
 @NgModule({
     imports: [
@@ -58,7 +62,8 @@ import { ChatComponent } from './admin/chat/chat.component';
         DashboardComponent,
         MaindashboardComponent,
         EmployeetableComponent,
-        ChatComponent
+        ChatComponent,
+        ShoppingbagComponent
     ],
     providers: [
         //customHttpProvider,
@@ -68,7 +73,9 @@ import { ChatComponent } from './admin/chat/chat.component';
         UserService,
         BedrijfService,
         ConversationService,
-        SocketService
+        ProductService,
+        SocketService,
+        OrderService
     ],
     bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map'
 
+import {NgxPermissionsService} from 'ngx-permissions';
 import { UserService} from "./user.service";
  
 @Injectable()
@@ -14,7 +15,7 @@ export class AuthenticationService {
     authToken: any;
     user: any;
     isDev:boolean;
-    constructor(private http:Http,private router: Router, private userService:UserService) {
+    constructor(private http:Http,private router: Router, private userService:UserService, private permissionsService: NgxPermissionsService) {
         this.isDev=false; //bij deployen
         //this.isDev=true; //bij development
     }
@@ -41,6 +42,8 @@ export class AuthenticationService {
         this.authToken = null;
         this.user = null;
         localStorage.clear();
+        this.permissionsService.flushPermissions();
+        this.router.navigate(['/login']);
     }
     
       storeUserData(token, user){

@@ -19,6 +19,14 @@
         
             <li [routerLinkActive]="['active']"><a [routerLink]="['/welcome']">Welcome</a></li>
             <li [routerLinkActive]="['active']"><a [routerLink]="['/login']">Aanmelden</a></li>
+            <li *ngIf="order" class="dropdown">
+                <a role="button" data-toggle="dropdown">
+                    <i class="glyphicon glyphicon-shopping-cart"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                  <app-shoppingbag></app-shoppingbag>
+                </ul>
+              </li>
         <!-- 
         <li><a href="../navbar/">Default</a></li>
         <li><a href="../navbar-static-top/">Static top</a></li>
