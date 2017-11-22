@@ -33,10 +33,11 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordrecoverComponent } from './passwordrecover/passwordrecover.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
-import { MaindashboardComponent} from './admin/dashboard/mainDashboard/maindashboard.component';
-import {EmployeetableComponent} from './admin/employeetable/employeetable.component';
-import { ChatComponent } from './admin/chat/chat.component';
-import { ShoppingbagComponent} from './shop/shoppingbag.component';
+import { MaindashboardComponent } from './admin/dashboard/mainDashboard/maindashboard.component';
+import { EmployeetableComponent } from './admin/employeetable/employeetable.component';
+import { ChatComponent } from './chat/chat.component';
+import { ShoppingbagComponent} from './shop/shoppingbag/shoppingbag.component';
+import { PlaceOrderComponent } from './shop/placeorder/placeorder.component';
  
 @NgModule({
     imports: [
@@ -63,7 +64,8 @@ import { ShoppingbagComponent} from './shop/shoppingbag.component';
         MaindashboardComponent,
         EmployeetableComponent,
         ChatComponent,
-        ShoppingbagComponent
+        ShoppingbagComponent,
+        PlaceOrderComponent
     ],
     providers: [
         //customHttpProvider,

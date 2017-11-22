@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { Bestelling } from '../_models/bestelling';
-import { Product} from '../_models/product';
-import { OrderService} from '../_services/order.service';
+import { Bestelling } from '../../_models/bestelling';
+import { Product} from '../../_models/product';
+import { OrderService} from '../../_services/order.service';
 
 @Component({
     selector: 'app-shoppingbag',

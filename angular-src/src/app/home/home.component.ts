@@ -9,6 +9,10 @@ import { Locatie } from '../_models/locatie';
 import { UserService } from '../_services/user.service';
 import { BedrijfService } from '../_services/bedrijf.service';
 
+
+import { SocketService } from '../_services/socket.service';
+import { PushNotificationsService} from 'angular2-notifications';
+
 import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
 
 @Component({
@@ -26,7 +30,7 @@ export class HomeComponent implements OnInit {
     timerSubscription;
     //bedrijf: Bedrijf = new Bedrijf("", "", new Locatie("", "", 10, "", ""));;
 
-    constructor(private permissionsService: NgxPermissionsService, private userService: UserService, private bedrijfService: BedrijfService) {
+    constructor(private permissionsService: NgxPermissionsService, private userService: UserService, private bedrijfService: BedrijfService,private socketService: SocketService, private pushNotification : PushNotificationsService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.currentUser.online = true;
         this.userService.update(this.currentUser).subscribe();
@@ -37,6 +41,17 @@ export class HomeComponent implements OnInit {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.currentUser.online = true;
         this.userService.update(this.currentUser).subscribe();
+        this.socketService.on('message-received', (msg: any) => {
+            if(msg.naar === this.currentUser._id){
+                let options = { //set options
+                    body: msg.message,
+                    icon: "assets/user.png",
+                    vibrate: [200,100,200]
+                  }
+                let naam = this.users.find(u=>u._id===msg.van).firstName + this.users.find(u=>u._id===msg.van).lastName;
+                this.pushNotification.create('New message from '+ naam, options).subscribe();
+            }
+          });
     }
 
 

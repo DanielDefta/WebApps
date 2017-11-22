@@ -1,13 +1,13 @@
 import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
-import { User } from '../../_models/user';
-import {Locatie} from '../../_models/locatie';
-import { Conversatie} from '../../_models/conversatie';
-import { Bericht } from '../../_models/bericht';
-import { UserService } from '../../_services/user.service';
-import { ConversationService} from '../../_services/conversation.service';
-import { SocketService } from '../../_services/socket.service';
+import { User } from '../_models/user';
+import { Locatie } from '../_models/locatie';
+import { Conversatie } from '../_models/conversatie';
+import { Bericht } from '../_models/bericht';
+import { UserService } from '../_services/user.service';
+import { ConversationService} from '../_services/conversation.service';
+import { SocketService } from '../_services/socket.service';
 
 import { PushNotificationsService} from 'angular2-notifications';
 
@@ -25,6 +25,7 @@ export class ChatComponent implements OnInit {
     onlineUsers : User[] = [];
 
     currentConversation: Conversatie;
+    afzender : User;
 
     timerSubscription;
     messageSubscription;
@@ -32,6 +33,8 @@ export class ChatComponent implements OnInit {
     constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService, private pushNotification : PushNotificationsService){
         this.pushNotification.requestPermission();
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser.online = true;
+        this.userService.update(this.currentUser).subscribe();
     }
 
     ngOnInit() {
@@ -75,6 +78,11 @@ export class ChatComponent implements OnInit {
         this.conversationService.getByUsers(model).subscribe(
             data => {
                 this.currentConversation = data;
+                this.currentConversation.user1 = this.users.find(u=>u._id===this.currentConversation.userId1);
+                this.currentConversation.user2 = this.users.find(u=>u._id===this.currentConversation.userId2);
+                console.log(this.currentConversation);
+                console.log(this.currentConversation.user1);
+                console.log(this.currentConversation.user2);
             },
             error =>{
                 this.conversationService.create(new Conversatie(this.currentUser,this.users.find(user => user._id===_id))).subscribe();
@@ -90,11 +98,12 @@ export class ChatComponent implements OnInit {
     //deze methode vervolledigen met socket.io => DONE
     message:string= "";
     sendMessage(){
-        this.currentConversation.berichten.push(new Bericht(this.currentUser._id,this.currentConversation.userId1==this.currentUser._id?this.currentConversation.userId2:this.currentConversation.userId1,this.message));
-        this.message="";
-        this.conversationService.update(this.currentConversation).subscribe();
-        this.socketService.emit('send-message', this.currentConversation.berichten[this.currentConversation.berichten.length-1]);
-
+        if(this.message.trim()!= "" && this.currentConversation!= null){
+            this.currentConversation.berichten.push(new Bericht(this.currentUser._id,this.currentConversation.userId1==this.currentUser._id?this.currentConversation.userId2:this.currentConversation.userId1,this.message));
+            this.message="";
+            this.conversationService.update(this.currentConversation).subscribe();
+            this.socketService.emit('send-message', this.currentConversation.berichten[this.currentConversation.berichten.length-1]);
+        }
     }
 
         

@@ -98,6 +98,7 @@ export class WelcomeComponent implements OnInit {
         let product: Product = this.producten.find(p=>p._id===id);
         this.order.producten.push(product);
         this.order.totaal+=product.prijs;
+        this.order.totaal = parseFloat(this.order.totaal.toFixed(2));
         localStorage.setItem("shoppingBag", JSON.stringify(this.order));
         this.orderService.setOrder(this.order);
     }

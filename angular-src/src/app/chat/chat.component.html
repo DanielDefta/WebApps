@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="content" style="margin-top: -100px;">
+    <div class="contacts">
+        <div class="c">
+            <div class="title">
+                <p>Contacts</p>
+            </div>
+            <div class="search">
+                <input type="text" placeholder="Search Person">
+            </div>
+            <div class="list">
+                <div class="contact" *ngFor="let user of users" (click)="loadConversation(user._id)" >
+                    <div class="initialso" *ngIf="user.online">
+                        <p>DD</p>
+                    </div>
+                    <div class="initialsoff" *ngIf="!user.online">
+                        <p>DD</p>
+                    </div>
+                    <div class="name">
+                        <p>{{user.firstName}} {{user.lastName}}</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="mainmessage">
+        <div class="c">
+            <div class="title" *ngIf="currentConversation">
+                <p>Contactje 1 </p>
+                <div class="online">
+                    <p>online</p>
+                </div>
+            </div>
+            <div class="chatbox" *ngIf="currentConversation" #scrollMe (scroll)="onScroll()" style="padding-top: 15px;">
+                <div *ngFor="let bericht of currentConversation.berichten" class="{{bericht.van===currentUser._id?'msgu':'msgo'}}">
+                    <p>{{bericht.message}}</p>
+                    <!--<span class="tooltiptext">Tooltip text</span>-->
+                </div>
+            </div>
+            <div class="sendmsg">
+                <input type="text" placeholder="type a message" [(ngModel)]="message" (keyup.enter)="sendMessage()">
+                <button (click)="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>

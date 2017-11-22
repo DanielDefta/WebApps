@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
     }
  
     //inloggen en indien gelukt verder gaan naar de return url
+    
     login() {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)

@@ -7,8 +7,10 @@ import { MijnprofielComponent} from './mijnProfiel/mijnprofiel.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordrecoverComponent} from './passwordrecover/passwordrecover.component';
+import { PlaceOrderComponent } from './shop/placeorder/placeorder.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { ChatComponent } from './chat/chat.component';
 
 
 const appRoutes: Routes = [
@@ -32,6 +34,8 @@ const appRoutes: Routes = [
    { path: 'register', component: RegisterComponent },
    { path: 'passwordrecover' , component: PasswordrecoverComponent},
    { path: 'mijnprofiel', component: MijnprofielComponent, canActivate: [AuthGuard]},
+   { path: 'messenger', component: ChatComponent, canActivate: [AuthGuard]},
+   { path: 'placeorder', component: PlaceOrderComponent},
 
    // otherwise redirect to home
    { path: '**', component: HomeComponent, canActivate: [AuthGuard, NgxPermissionsGuard],

@@ -22,7 +22,9 @@ export class MijnprofielComponent implements OnInit {
     timerSubscription;
 
    constructor(private userService: UserService) {
-       this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser.online = true;
+    this.userService.update(this.currentUser).subscribe();
    }
 
    ngOnInit() {
