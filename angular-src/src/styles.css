@@ -84,39 +84,42 @@ p {
     display: block;
     height: 30px;
     margin-bottom: 2px;
-}/* 
-.mainmessage .c .chatbox .msgu .tooltiptext {
-  visibility: visible;
-  top: -5px;
+}
+
+.mainmessage .c .chatbox .msgu p .tooltiptext {
+  visibility: hidden;
+  top:5px;
+  left: -50px;
   background-color: black;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 0px 2px;
   border-radius: 6px;
 
   position: absolute;
   z-index: 10;
 }
-.mainmessage .c .chatbox .msgo .tooltiptext {
+
+.mainmessage .c .chatbox .msgo p .tooltiptext {
   visibility: hidden;
-  top: -5px;
-  left: 10%;
+  top:5px;
+  right: -50px;
   background-color: black;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 0px 2px;
   border-radius: 6px;
 
   position: absolute;
-  z-index: 100;
+  z-index: 10;
 }
-.mainmessage .c .chatbox .msgu:hover .tooltiptext {
+.mainmessage .c .chatbox .msgo p:hover .tooltiptext {
   visibility: visible;
 }
 
-.mainmessage .c .chatbox .msgo:hover .tooltiptext {
+.mainmessage .c .chatbox .msgu  p:hover .tooltiptext {
   visibility: visible;
-} */
+} 
 
 .mainmessage .c .chatbox .msgu p {
     background-color: #0084ff;
@@ -153,6 +156,7 @@ p {
 }
 
 .mainmessage .c .sendmsg {
+    background: white;
     border-top: 1px solid #dddddd;
     box-sizing: border-box;
     text-align: left;
@@ -271,6 +275,7 @@ p {
 
 .contacts .contact .initialso p {
     font-size: 15px;
+    font-weight: bold;
     color: white;
 }
 
@@ -317,6 +322,75 @@ p {
 .mainmessage .c {
     box-sizing: border-box;
     height: 100%;
+}
+
+@media (max-width: 650px) {
+  .search {
+  }
+  .contacts{
+    min-width: 17px;
+    width:17px;
+  }
+  .contacts .c .title p{
+    font-size: 14px;
+  }
+  .contacts .list .contact{
+    text-align: center;
+  }
+  .contacts .c .list{
+    height:85%
+  }
+  .list .contact .name{
+    display: none;
+  }
+  .sendmsg input{
+    outline: none;
+    border: none;
+    height: 28px;
+    margin: 3px 0 5px 4px;
+    width: 82%;
+  }
+  .mainmessage .c .sendmsg button{
+    vertical-align: middle;
+    border: none;
+    outline: none;
+    border-left: solid 1px #dddddd;
+    background-color: transparent;
+    margin: 0;
+    height: 38px;
+    width: 16%;
+  }
+}
+
+@media (max-height: 960px) {
+  .contacts .c .list{
+    height:90%
+  }
+}
+@media (max-height: 880px) {
+  .contacts .c .list{
+    height:88%
+  }
+}
+@media (max-height: 760px) {
+  .contacts .c .list{
+    height:85%
+  }
+}
+@media (max-height: 600px) {
+  .contacts .c .list{
+    height:78%
+  }
+}
+@media (max-height: 430px) {
+  .contacts .c .list{
+    height:72%
+  }
+}
+@media (max-height: 350px) {
+  .contacts .c .list{
+    height:66%
+  }
 }
 /* Einde Chat*/
 

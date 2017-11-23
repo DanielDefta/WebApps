@@ -21,7 +21,6 @@ function register(req, res) {
 }
  
 function getAll(req, res) {
-    console.log("2");
     productService.getAll()
         .then(function (bedrijven) {
             res.send(bedrijven);

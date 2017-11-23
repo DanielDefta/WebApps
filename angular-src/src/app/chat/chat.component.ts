@@ -9,7 +9,6 @@ import { UserService } from '../_services/user.service';
 import { ConversationService} from '../_services/conversation.service';
 import { SocketService } from '../_services/socket.service';
 
-import { PushNotificationsService} from 'angular2-notifications';
 
 @Component({
     selector: 'app-chat',
@@ -30,8 +29,9 @@ export class ChatComponent implements OnInit {
     timerSubscription;
     messageSubscription;
 
-    constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService, private pushNotification : PushNotificationsService){
-        this.pushNotification.requestPermission();
+    position = 'before';
+
+    constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService){
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.currentUser.online = true;
         this.userService.update(this.currentUser).subscribe();
@@ -40,18 +40,19 @@ export class ChatComponent implements OnInit {
     ngOnInit() {
         this.loadAllUsers();
         this.socketService.on('message-received', (msg: any) => {
+            console.log(msg);
             if(msg.naar === this.currentUser._id){
                 let options = { //set options
                     body: msg.message,
                     icon: "assets/user.png",
                     vibrate: [200,100,200]
                   }
-                let naam = this.users.find(u=>u._id===msg.van).firstName + this.users.find(u=>u._id===msg.van).lastName;
-                this.pushNotification.create('New message from '+ naam, options).subscribe();
             }
             if(this.currentConversation != undefined){
                 if(msg.van === this.currentConversation.userId1 || msg.van === this.currentConversation.userId2)
                 this.currentConversation.berichten.push(msg);
+                this.disableScrollDown = false;
+                this.scrollToBottom();
             }
           });
     }
@@ -80,13 +81,20 @@ export class ChatComponent implements OnInit {
                 this.currentConversation = data;
                 this.currentConversation.user1 = this.users.find(u=>u._id===this.currentConversation.userId1);
                 this.currentConversation.user2 = this.users.find(u=>u._id===this.currentConversation.userId2);
-                console.log(this.currentConversation);
-                console.log(this.currentConversation.user1);
-                console.log(this.currentConversation.user2);
+                this.currentConversation.userId1 = this.currentConversation.user1._id;
+                this.currentConversation.userId2 = this.currentConversation.user2._id;
             },
             error =>{
                 this.conversationService.create(new Conversatie(this.currentUser,this.users.find(user => user._id===_id))).subscribe();
-                this.conversationService.getByUsers(model).subscribe(data => this.currentConversation=data);
+                this.conversationService.getByUsers(model).subscribe(data => {
+                    console.log(data);
+                    this.currentConversation = data;
+                    this.currentConversation.user1 = this.users.find(u=>u._id===this.currentConversation.userId1);
+                    this.currentConversation.user2 = this.users.find(u=>u._id===this.currentConversation.userId2);
+                    this.currentConversation.userId1 = this.currentConversation.user1._id;
+                    this.currentConversation.userId2 = this.currentConversation.user2._id;
+                    
+                });
             });
     }
 
@@ -98,8 +106,9 @@ export class ChatComponent implements OnInit {
     //deze methode vervolledigen met socket.io => DONE
     message:string= "";
     sendMessage(){
+        var date = new Date();
         if(this.message.trim()!= "" && this.currentConversation!= null){
-            this.currentConversation.berichten.push(new Bericht(this.currentUser._id,this.currentConversation.userId1==this.currentUser._id?this.currentConversation.userId2:this.currentConversation.userId1,this.message));
+            this.currentConversation.berichten.push(new Bericht(this.currentUser._id,this.currentConversation.userId1==this.currentUser._id?this.currentConversation.userId2:this.currentConversation.userId1,this.message, date));
             this.message="";
             this.conversationService.update(this.currentConversation).subscribe();
             this.socketService.emit('send-message', this.currentConversation.berichten[this.currentConversation.berichten.length-1]);
@@ -115,19 +124,19 @@ export class ChatComponent implements OnInit {
 
     //wordt aangeroepen bij het scrollen
     public onScroll() {
-        let element = this.myScrollContainer.nativeElement
-        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight
+        let element = this.myScrollContainer.nativeElement;
+        let atBottom = element.scrollHeight - element.scrollTop === element.clientHeight;
         if (this.disableScrollDown && atBottom) {
-            this.disableScrollDown = false
+            this.disableScrollDown = false;
         } else {
-            this.disableScrollDown = true
+            this.disableScrollDown = true;
         }
     }
 
 
     public scrollToBottom(): void {
         if (this.disableScrollDown) {
-            return
+            return;
         }
         try {
             this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;

@@ -6,15 +6,15 @@
                 <p>Contacts</p>
             </div>
             <div class="search">
-                <input type="text" placeholder="Search Person">
+                <input type="text" placeholder="Search...">
             </div>
             <div class="list">
                 <div class="contact" *ngFor="let user of users" (click)="loadConversation(user._id)" >
                     <div class="initialso" *ngIf="user.online">
-                        <p>DD</p>
+                        <p style="min-width: 30px;">{{user.firstName.charAt(0)}}{{user.lastName.charAt(0)}}</p>
                     </div>
                     <div class="initialsoff" *ngIf="!user.online">
-                        <p>DD</p>
+                        <p style="min-width: 30px;">{{user.firstName.charAt(0)}}{{user.lastName.charAt(0)}}</p>
                     </div>
                     <div class="name">
                         <p>{{user.firstName}} {{user.lastName}}</p>
@@ -28,15 +28,39 @@
     <div class="mainmessage">
         <div class="c">
             <div class="title" *ngIf="currentConversation">
-                <p>Contactje 1 </p>
-                <div class="online">
-                    <p>online</p>
+                <div *ngIf="currentConversation.user1._id != currentUser._id">
+                        <p>{{currentConversation.user1.firstName}} {{currentConversation.user1.lastName}}</p>
+                        <div class="online">
+                            <p *ngIf="currentConversation.user1.online===true">online</p>
+                            <p *ngIf="currentConversation.user1.online===false">offline</p>
+                            <p *ngIf="currentConversation.user1.online===undefined">offline</p>
+                        </div>
                 </div>
+
+                <div *ngIf="currentConversation.user2._id != currentUser._id">
+                        <p>{{currentConversation.user2.firstName}} {{currentConversation.user2.lastName}}</p>
+                        <div class="online">
+                            <p *ngIf="currentConversation.user2.online===true">online</p>
+                            <p *ngIf="currentConversation.user2.online===false">offline</p>
+                            <p *ngIf="currentConversation.user2.online===undefined">offline</p>
+                        </div>
+                </div>
+
+                <div *ngIf="currentConversation.user2._id === currentUser._id && currentConversation.user1._id === currentUser._id">
+                        <p>{{currentUser.firstName}} {{currentUser.lastName}}</p>
+                        <div class="online">
+                            <p *ngIf="currentUser.online===true">online</p>
+                            <p *ngIf="currentUser.online===false">offline</p>
+                        </div>
+                </div>
+                
             </div>
-            <div class="chatbox" *ngIf="currentConversation" #scrollMe (scroll)="onScroll()" style="padding-top: 15px;">
+            <div class="chatbox" *ngIf="currentConversation" #scrollMe (scroll)="onScroll()">
                 <div *ngFor="let bericht of currentConversation.berichten" class="{{bericht.van===currentUser._id?'msgu':'msgo'}}">
-                    <p>{{bericht.message}}</p>
-                    <!--<span class="tooltiptext">Tooltip text</span>-->
+                    <p>{{bericht.message}}
+
+                    <span class="tooltiptext">{{bericht.hours}}:{{bericht.minutes}}</span>
+                    </p>
                 </div>
             </div>
             <div class="sendmsg">

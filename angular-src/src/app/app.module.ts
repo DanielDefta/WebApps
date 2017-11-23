@@ -38,6 +38,7 @@ import { EmployeetableComponent } from './admin/employeetable/employeetable.comp
 import { ChatComponent } from './chat/chat.component';
 import { ShoppingbagComponent} from './shop/shoppingbag/shoppingbag.component';
 import { PlaceOrderComponent } from './shop/placeorder/placeorder.component';
+
  
 @NgModule({
     imports: [
