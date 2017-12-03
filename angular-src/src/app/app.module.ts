@@ -38,6 +38,8 @@ import { EmployeetableComponent } from './admin/employeetable/employeetable.comp
 import { ChatComponent } from './chat/chat.component';
 import { ShoppingbagComponent} from './shop/shoppingbag/shoppingbag.component';
 import { PlaceOrderComponent } from './shop/placeorder/placeorder.component';
+import { LoginRegisterComponent } from './shop/placeorder/loginregister/loginregister.component';
+import { CustomerDetailsComponent } from './shop/placeorder/customerdetails/customerdetails.component';
 
  
 @NgModule({
@@ -66,7 +68,9 @@ import { PlaceOrderComponent } from './shop/placeorder/placeorder.component';
         EmployeetableComponent,
         ChatComponent,
         ShoppingbagComponent,
-        PlaceOrderComponent
+        PlaceOrderComponent,
+        LoginRegisterComponent,
+        CustomerDetailsComponent
     ],
     providers: [
         //customHttpProvider,

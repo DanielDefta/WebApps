@@ -23,14 +23,14 @@ export class DashboardComponent implements OnInit {
   showOtherDashboard: boolean = false;
 
   constructor(private userService: UserService) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     this.currentUser.online = true;
     this.userService.update(this.currentUser).subscribe();
   }
 
   ngOnInit() {
     this.loadAllUsers();
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
     this.currentUser.online = true;
     this.userService.update(this.currentUser).subscribe();
   }

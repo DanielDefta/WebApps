@@ -36,30 +36,30 @@ export class AuthenticationService {
 
     logout() {
         // remove user from local storage to log user out
-        let user = JSON.parse(localStorage.getItem('currentUser'));
+        let user = JSON.parse(sessionStorage.getItem('currentUser'));
         user.online = false;
         this.userService.update(user).subscribe();
         this.authToken = null;
         this.user = null;
-        localStorage.clear();
+        sessionStorage.clear();
         this.permissionsService.flushPermissions();
         this.router.navigate(['/login']);
     }
     
       storeUserData(token, user){
-        localStorage.setItem('id_token', token);
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        sessionStorage.setItem('id_token', token);
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
         this.authToken = token;
         this.user = user;
       }
     
       loadToken(){
-        const token = localStorage.getItem('id_token');
+        const token = sessionStorage.getItem('id_token');
         this.authToken = token;
       }
     
       loggedIn(){
-        return tokenNotExpired();
+        return tokenNotExpired(null, sessionStorage.getItem("id_token"));
       }
 
       prepEndpoint(ep){

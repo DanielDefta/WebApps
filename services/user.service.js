@@ -34,7 +34,9 @@ function authenticate(username, password) {
                 username: user.username,
                 firstName: user.firstName,
                 lastName: user.lastName,
+                locatie: user.locatie,
                 roles:user.roles,
+                ordersIds: user.ordersIds,
                 token: 'JWT'+ jwt.sign(user, config.secret, {
                     expiresIn: 604800}) // 1 week {expiresIn:'20s'}) //error in de klassen jsonwebtoken/index.js:155:18
             });
@@ -146,7 +148,6 @@ function resetPassword(_id, password){
 
 function create(userParam) {
     var deferred = Q.defer();
-
     // validation
     db.users.findOne(
         { username: userParam.username },
@@ -181,7 +182,7 @@ function create(userParam) {
 
 function update(_id, userParam) {
     var deferred = Q.defer();
-
+    
     // validation
     db.users.findById(_id, function (err, user) {
         if (err) deferred.reject(err.name + ': ' + err.message);
@@ -197,21 +198,26 @@ function update(_id, userParam) {
                         // username already exists
                         deferred.reject('Username "' + req.body.username + '" is already taken')
                     } else {
+                        console.log("1");
                         updateUser();
                     }
                 });
         } else {
+            console.log("2");            
             updateUser();
         }
     });
 
     function updateUser() {
         // fields to update
+        console.log("2");  
+        console.log(userParam.ordersIds);      
         var set = {
             firstName: userParam.firstName,
             lastName: userParam.lastName,
             username: userParam.username,
-            online: userParam.online
+            online: userParam.online,
+            ordersIds: userParam.ordersIds
         };
 
         // update password if it was entered

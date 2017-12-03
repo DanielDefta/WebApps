@@ -40,10 +40,10 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        this.notificaties = JSON.parse(localStorage.getItem('notificaties'));
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        this.notificaties = JSON.parse(sessionStorage.getItem('notificaties'));
         if(this.notificaties===null) this.notificaties = [];
-        this.aantalNotificaties = JSON.parse(localStorage.getItem('aantalNotificaties'));
+        this.aantalNotificaties = JSON.parse(sessionStorage.getItem('aantalNotificaties'));
         if (this.currentUser) {
             this.loadAllUsers();
             

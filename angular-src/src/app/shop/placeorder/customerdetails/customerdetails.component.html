@@ -1,0 +1,71 @@
+<div class="container">
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <h4>We are almost there</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <h4 style="text-align: center">Please enter the required personal information in order to finalize the order</h4>
+                            <form name="form" (ngSubmit)="f.form.valid && placeOrder()" #f="ngForm" novalidate style="width: 80%; margin:0 10% 0% 10%">
+                                    <p style="border-bottom: 1px solid;">Account gegevens</p>
+                                    <div class="col-sm-12">
+                                        <div class="form-group col-sm-6" [ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
+                                            <label for="firstName">First Name*</label>
+                                            <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required/>
+                                            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+                                        </div>
+                                        <div class="form-group col-sm-6" [ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
+                                            <label for="lastName">Last Name*</label>
+                                            <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required />
+                                            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+                                        </div>
+                                        <div class="form-group col-sm-6" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                                            <label for="email">Email*</label>
+                                            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
+                                            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+                                        </div>
+                                    </div>
+                                    <p style="border-bottom: 1px solid">Adress</p>
+                                    <div class="col-sm-12">
+                                        <div class="form-group col-sm-12" [ngClass]="{ 'has-error': f.submitted && !straat.valid }">
+                                            <label for="straat">Straat*</label>
+                                            <input type="text" class="form-control" name="straat" [(ngModel)]="model.locatie.straat" #straat="ngModel" required />
+                                            <div *ngIf="f.submitted && !straat.valid" class="help-block">Straat is required</div>
+                                        </div>
+                                        <div class="form-group col-sm-3" [ngClass]="{ 'has-error': f.submitted && !nummer.valid }">
+                                            <label for="nummer">Nummer*</label>
+                                            <input type="number" class="form-control" name="nummer" [(ngModel)]="model.locatie.nummer" #nummer="ngModel" required />
+                                            <div *ngIf="f.submitted && !nummer.valid" class="help-block">Nummer is required</div>
+                                        </div>
+                                        <div class="form-group col-sm-3" [ngClass]="{ 'has-error': f.submitted && !postcode.valid }">
+                                            <label for="postcode">Postcode*</label>
+                                            <input type="number" class="form-control" name="postcode" [(ngModel)]="model.locatie.postcode" #postcode="ngModel" required
+                                            />
+                                            <div *ngIf="f.submitted && !postcode.valid" class="help-block">Postcode is required</div>
+                                        </div>
+                
+                                        <div class="form-group col-sm-6" [ngClass]="{ 'has-error': f.submitted && !stad.valid }">
+                                            <label for="stad">Stad*</label>
+                                            <input type="text" class="form-control" name="stad" [(ngModel)]="model.locatie.stad" #stad="ngModel" required />
+                                            <div *ngIf="f.submitted && !stad.valid" class="help-block">Stad is required</div>
+                                        </div>
+                                        <div class="form-group col-sm-7" [ngClass]="{ 'has-error': f.submitted && !land.valid }">
+                                            <label for="land">Land*</label>
+                                            <input type="text" class="form-control" name="land" [(ngModel)]="model.locatie.land" #land="ngModel" required />
+                                            <div *ngIf="f.submitted && !land.valid" class="help-block">Land is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button [disabled]="loading" class="btn btn-primary">Place order</button>
+                                        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                                        />
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>

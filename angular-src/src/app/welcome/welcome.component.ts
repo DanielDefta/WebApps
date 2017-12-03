@@ -80,8 +80,8 @@ export class WelcomeComponent implements OnInit {
 
         this.productService.getAll().subscribe(data => this.producten = data);
 
-        if(localStorage.getItem("currentUser")){
-            let user = JSON.parse(localStorage.getItem("currentUser"));
+        if(sessionStorage.getItem("currentUser")){
+            let user = JSON.parse(sessionStorage.getItem("currentUser"));
             if(user){
                 this.permissionsService.loadPermissions(user.roles);
             }

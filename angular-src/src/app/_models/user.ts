@@ -14,6 +14,7 @@ export class User {
     locatie: Locatie;
     roles: string[];
     online: boolean;
+    ordersIds: string[];
 
     constructor(
         username: string,

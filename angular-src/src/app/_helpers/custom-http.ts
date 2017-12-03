@@ -38,7 +38,7 @@ export class CustomHttp extends Http {
         options.headers = options.headers || new Headers();
  
         // add authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         if (currentUser && currentUser.token) {
             options.headers.set('Authorization', 'Bearer ' + currentUser.token);
         }

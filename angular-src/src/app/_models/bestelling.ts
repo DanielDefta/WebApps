@@ -1,4 +1,5 @@
 import {Product} from './product';
+import { Locatie } from './locatie';
 
 export class Bestelling {
     _id: string;
@@ -6,6 +7,7 @@ export class Bestelling {
     producten : Product[];
     chauffeurId: string;
     totaal: number = 0;
+    locatie: Locatie;
 
     constructor(omschrijving:string,producten:Product[]){
          this.omschrijving = omschrijving;

@@ -29,6 +29,7 @@ const users = require('./controllers/users.controller');
 const bedrijf = require('./controllers/bedrijf.controller');
 const conversation = require('./controllers/conversation.controller');
 const producten = require('./controllers/product.controller');
+const order = require('./controllers/order.controller');
 
 // Port Number: 1ste is voor development 2de voor prod en deployment
 //const port =4000;
@@ -53,6 +54,7 @@ app.use('/users', users);
 app.use('/bedrijf', bedrijf);
 app.use('/conversation',conversation);
 app.use('/product', producten);
+app.use('/order', order);
 
 // Index Route
 app.get('/', (req, res) => {

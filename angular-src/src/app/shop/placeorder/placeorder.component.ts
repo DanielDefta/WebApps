@@ -5,55 +5,61 @@ import { Bestelling } from '../../_models/bestelling';
 import { Product } from '../../_models/product';
 import { OrderService } from '../../_services/order.service';
 
-import {slideInOutAnimation} from '../../_animations/slide-in-out.animation';
- 
+import { slideInOutAnimation } from '../../_animations/slide-in-out.animation';
+import { UserService } from '../../_services/user.service';
+import { AlertService } from '../../_services/alert.service';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../_services/authentication.service';
+
 @Component({
     moduleId: module.id,
     templateUrl: 'placeorder.component.html',
 
-    animations:[slideInOutAnimation],
+    animations: [slideInOutAnimation],
 
-    host: { '[@slideInOutAnimation]':''}
+    host: { '[@slideInOutAnimation]': '' }
 })
- 
-export class PlaceOrderComponent implements OnInit {
-    model: any = {};
-    showPassword:boolean=false;
-    loading = false;
 
+export class PlaceOrderComponent implements OnInit {
+    loggedIn = false;
     order: Bestelling;
-    
-        constructor(
-            private orderService: OrderService
-        ){
-    
+
+    constructor(
+        private router: Router,
+        private authService: AuthenticationService,
+        private orderService: OrderService,
+        private userService: UserService,
+        private alertService: AlertService
+    ) {
+        this.orderService.loggedIn.subscribe(l => this.loggedIn = l);
+    }
+
+    ngOnInit() {
+        this.loggedIn = !this.authService.loggedIn();
+        this.orderService.order.subscribe(order => {
+            this.order = order;
+        });
+    }
+
+    removeProduct(i: number) {
+        let prijs = this.order.producten[i].prijs;
+        this.order.producten[i] = null;
+
+        let producten: Product[] = [];
+        this.order.producten.forEach(p => {
+            if (p != null)
+                producten.push(p);
+        })
+        this.order.producten = producten;
+        this.order.totaal -= prijs;
+        this.order.totaal = parseFloat(this.order.totaal.toFixed(2));
+        if (this.order.producten.length > 0) {
+            localStorage.setItem("shoppingBag", JSON.stringify(this.order));
+            this.orderService.setOrder(this.order);
         }
-    
-        ngOnInit(){
-            this.orderService.order.subscribe(order => {
-                this.order=order;
-            });
+        else {
+            localStorage.removeItem("shoppingBag");
+            this.orderService.setOrder(null);
         }
-    
-        removeProduct(i:number){
-            let prijs = this.order.producten[i].prijs;
-            this.order.producten[i]=null;
-    
-            let producten: Product[] = [];
-            this.order.producten.forEach(p=>{
-                if(p!=null)
-                    producten.push(p);
-            })
-            this.order.producten=producten;
-            this.order.totaal-=prijs;
-            this.order.totaal = parseFloat(this.order.totaal.toFixed(2));
-            if(this.order.producten.length>0){
-                localStorage.setItem("shoppingBag", JSON.stringify(this.order));
-                this.orderService.setOrder(this.order);
-            }
-            else{
-                localStorage.removeItem("shoppingBag");
-                this.orderService.setOrder(null);
-            }
-        }
+    }
 }

@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>Log in or register</h4>
+                    </div>
+                </div>
+                <div class="panel-body" style="overflow-y: scroll; max-height: 400px;">
+                    <div class="col-md-6">
+                        <h3 style="text-align: center">I'm a customer already</h3>
+                        <h6 style="text-align: center">Log in with your e-mail adress and password</h6>
+                        <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required aut/>
+                                <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+                            </div>
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                                <label for="password">Password</label>
+                                <input type="{{showPassword?'text':'password'}}" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+                                    required autocomplete="off"/>
+                                <input style="padding-top: 10px;display: inline-block;height: auto;margin-top: 6px;" type="checkbox" name="Toggle" ng-model="showPassword"
+                                    ng-checked="showPassword" (click)="toggleShowPassword()">
+                                <label for="Toggle" style="font-size: 10px;font-weight: normal;position: absolute;padding: 7px 0px 0px 5px;">Show password</label>
+                                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                            </div>
+                            <div class="form-group">
+                                <button [disabled]="lloading" class="btn btn-primary" style="width:100%;">Login</button>
+
+                                <img *ngIf="lloading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                                />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 style="text-align: center">I'm a new customer</h3>
+                        <h6 style="text-align: center">Please register in order to be able to place your order and track it</h6>
+                        <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" name="username" [(ngModel)]="rmodel.username" #username="ngModel" required autocomplete="off"/>
+                                <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+                            </div>
+                            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                                <label for="password">Password</label>
+                                <input type="{{rShowPassword?'text':'password'}}" class="form-control" name="password" [(ngModel)]="rmodel.password" #password="ngModel"
+                                    required autocomplete="off"/>
+                                <input style="padding-top: 10px;display: inline-block;height: auto;margin-top: 6px;" type="checkbox" name="Toggle" ng-model="showPassword"
+                                    ng-checked="rShowPassword" (click)="rToggleShowPassword()">
+                                <label for="Toggle" style="font-size: 10px;font-weight: normal;position: absolute;padding: 7px 0px 0px 5px;">Show password</label>
+                                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+                            </div>
+                            <div class="form-group">
+                                <button [disabled]="rloading" class="btn btn-primary" style="width:100%;">Register</button>
+
+                                <img *ngIf="rloading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                                />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

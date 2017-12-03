@@ -32,7 +32,7 @@ export class ChatComponent implements OnInit {
     position = 'before';
 
     constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService){
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         this.currentUser.online = true;
         this.userService.update(this.currentUser).subscribe();
     }
