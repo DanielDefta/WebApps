@@ -10,7 +10,7 @@ Basic:
   - Log in as Admin or employee and log out
   - Reset your password
   - As an admin you can see all the other admins and employees and their basic data + who is online
-  - Place orders (still in development)
+  - Place orders
   - Register as a customer (still in development)
 
 Extras:
@@ -18,4 +18,4 @@ Extras:
     - Online / offline system -> works also when your browser crashes / internet connection is down
     - Chat system
     - Push notifications
-    - Shop system (still in development)
+    - Shop system
