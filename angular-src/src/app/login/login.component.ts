@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         
         //als er geen retourn url is dan /home als standaard zetten
-        if(this.returnUrl == "/") this.returnUrl = '/home';
+        if(this.returnUrl == "/") this.returnUrl = '/dashboard';
     }
  
     //inloggen en indien gelukt verder gaan naar de return url

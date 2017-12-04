@@ -156,3 +156,234 @@
   <style>
   </style>
 </ng-template>
+
+<ng-template [ngxPermissionsOnly]="['BESTELLING']">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          {{bedrijf.naam}}
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/welcome']">Welcome</a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/afdeling/bestelling']">Home</a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/messenger']">Chat</a>
+          </li>
+          <li [routerLinkActive]="['active']" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mijn profiel
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/mijnprofiel']">Mijn profiel</a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a href="#">Iets anders</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <!-- <li class="dropdown-header">Header</li> -->
+              <li>
+                <a (click)="logout()">Afmelden</a>
+              </li>
+            </ul>
+          </li>
+          <!-- Notifications-->
+          <li class="dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" href="#" (click)="readNotifications()">
+              <i class="glyphicon glyphicon-bell"></i>
+              <p style="    position: absolute;
+              bottom: 12px;
+              right: 6px;
+              font-size: 12px;">{{aantalNotificaties}}</p>
+            </a>
+            <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel" style="min-width: 300px; width: 400px;">
+
+              <div class="notification-heading">
+                <h4 class="menu-title">Notifications</h4>
+              </div>
+              <div class="notifications-wrapper" style="background-color: white;">
+                  <div class="notification-item" *ngFor="let noti of notificaties">
+                    <img src="http://www.leapcms.com/images/100pixels1.gif">
+                    <h4 class="item-title">New message from {{noti.from}}
+                      <small> 1 day ago</small>
+                    </h4>
+                    <p class="item-info">{{noti.message}}</p>
+                  </div>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <style>
+  </style>
+</ng-template>
+
+<ng-template [ngxPermissionsOnly]="['VERPAKKING']">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          {{bedrijf.naam}}
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/welcome']">Welcome</a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/afdeling/verpakking']">Home</a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/messenger']">Chat</a>
+          </li>
+          <li [routerLinkActive]="['active']" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mijn profiel
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/mijnprofiel']">Mijn profiel</a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a href="#">Iets anders</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <!-- <li class="dropdown-header">Header</li> -->
+              <li>
+                <a (click)="logout()">Afmelden</a>
+              </li>
+            </ul>
+          </li>
+          <!-- Notifications-->
+          <li class="dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" href="#" (click)="readNotifications()">
+              <i class="glyphicon glyphicon-bell"></i>
+              <p style="    position: absolute;
+              bottom: 12px;
+              right: 6px;
+              font-size: 12px;">{{aantalNotificaties}}</p>
+            </a>
+            <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel" style="min-width: 300px; width: 400px;">
+
+              <div class="notification-heading">
+                <h4 class="menu-title">Notifications</h4>
+              </div>
+              <div class="notifications-wrapper" style="background-color: white;">
+                  <div class="notification-item" *ngFor="let noti of notificaties">
+                    <img src="http://www.leapcms.com/images/100pixels1.gif">
+                    <h4 class="item-title">New message from {{noti.from}}
+                      <small> 1 day ago</small>
+                    </h4>
+                    <p class="item-info">{{noti.message}}</p>
+                  </div>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <style>
+  </style>
+</ng-template>
+
+<ng-template [ngxPermissionsOnly]="['LEVERING']">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+          aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          {{bedrijf.naam}}
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/welcome']">Welcome</a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/afdeling/levering']">Home</a>
+          </li>
+          <li [routerLinkActive]="['active']">
+            <a [routerLink]="['/messenger']">Chat</a>
+          </li>
+          <li [routerLinkActive]="['active']" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mijn profiel
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li [routerLinkActive]="['active']">
+                <a [routerLink]="['/mijnprofiel']">Mijn profiel</a>
+              </li>
+              <li [routerLinkActive]="['active']">
+                <a href="#">Iets anders</a>
+              </li>
+              <li role="separator" class="divider"></li>
+              <!-- <li class="dropdown-header">Header</li> -->
+              <li>
+                <a (click)="logout()">Afmelden</a>
+              </li>
+            </ul>
+          </li>
+          <!-- Notifications-->
+          <li class="dropdown">
+            <a id="dLabel" role="button" data-toggle="dropdown" href="#" (click)="readNotifications()">
+              <i class="glyphicon glyphicon-bell"></i>
+              <p style="    position: absolute;
+              bottom: 12px;
+              right: 6px;
+              font-size: 12px;">{{aantalNotificaties}}</p>
+            </a>
+            <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel" style="min-width: 300px; width: 400px;">
+
+              <div class="notification-heading">
+                <h4 class="menu-title">Notifications</h4>
+              </div>
+              <div class="notifications-wrapper" style="background-color: white;">
+                  <div class="notification-item" *ngFor="let noti of notificaties">
+                    <img src="http://www.leapcms.com/images/100pixels1.gif">
+                    <h4 class="item-title">New message from {{noti.from}}
+                      <small> 1 day ago</small>
+                    </h4>
+                    <p class="item-info">{{noti.message}}</p>
+                  </div>
+              </div>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <style>
+  </style>
+</ng-template>

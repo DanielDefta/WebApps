@@ -33,6 +33,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordrecoverComponent } from './passwordrecover/passwordrecover.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { BestellingAfdelingComponent } from './afdeling/bestelling/bestellingafdeling.component';
+import { VerpakkingAfdelingComponent } from './afdeling/verpakking/verpakkingafdeling.component';
+import { LeveringAfdelingComponent } from './afdeling/levering/leveringafdeling.component';
 import { MaindashboardComponent } from './admin/dashboard/mainDashboard/maindashboard.component';
 import { EmployeetableComponent } from './admin/employeetable/employeetable.component';
 import { ChatComponent } from './chat/chat.component';
@@ -40,6 +43,8 @@ import { ShoppingbagComponent} from './shop/shoppingbag/shoppingbag.component';
 import { PlaceOrderComponent } from './shop/placeorder/placeorder.component';
 import { LoginRegisterComponent } from './shop/placeorder/loginregister/loginregister.component';
 import { CustomerDetailsComponent } from './shop/placeorder/customerdetails/customerdetails.component';
+
+import { NgDragDropModule } from 'ng-drag-drop';
 
  
 @NgModule({
@@ -50,7 +55,8 @@ import { CustomerDetailsComponent } from './shop/placeorder/customerdetails/cust
         routing,
         NgxPermissionsModule.forRoot(),
         BrowserAnimationsModule,
-        PushNotificationsModule
+        PushNotificationsModule,
+        NgDragDropModule.forRoot()     
     ],
     declarations: [
         AppComponent,
@@ -65,6 +71,9 @@ import { CustomerDetailsComponent } from './shop/placeorder/customerdetails/cust
         PasswordrecoverComponent,
         DashboardComponent,
         MaindashboardComponent,
+        BestellingAfdelingComponent,
+        VerpakkingAfdelingComponent,
+        LeveringAfdelingComponent,
         EmployeetableComponent,
         ChatComponent,
         ShoppingbagComponent,
@@ -82,7 +91,7 @@ import { CustomerDetailsComponent } from './shop/placeorder/customerdetails/cust
         ConversationService,
         ProductService,
         SocketService,
-        OrderService
+        OrderService,
     ],
     bootstrap: [AppComponent]
 })

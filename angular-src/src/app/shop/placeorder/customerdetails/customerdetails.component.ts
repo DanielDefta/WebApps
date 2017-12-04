@@ -46,7 +46,9 @@ export class CustomerDetailsComponent implements OnInit {
 
     placeOrder(){
         this.order.locatie = this.model.locatie;
-
+        this.order.customerId = this.model._id;
+        this.order.status = "NEW";
+        this.order.statusDescription = "Uw bestelling is geregistreerd en zal binnenkort verwerkt worden";
         this.orderService.create(this.order).subscribe(
             data => {
                 if(this.model.ordersIds==undefined) this.model.ordersIds = [];
@@ -55,6 +57,7 @@ export class CustomerDetailsComponent implements OnInit {
                 console.log(this.model);
                 this.userService.update(this.model).subscribe(
                     data =>{
+                        this.alertService.success(this.order.statusDescription,true);
                         localStorage.removeItem("shoppingBag");
                         this.orderService.setOrder(null);
                         this.router.navigate(["/"]);

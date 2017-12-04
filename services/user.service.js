@@ -217,7 +217,9 @@ function update(_id, userParam) {
             lastName: userParam.lastName,
             username: userParam.username,
             online: userParam.online,
-            ordersIds: userParam.ordersIds
+            ordersIds: userParam.ordersIds,
+            locatie: userParam.locatie,
+            teLeverenOrdersIds: userParam.teLeverenOrdersIds
         };
 
         // update password if it was entered

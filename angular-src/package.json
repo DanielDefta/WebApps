@@ -30,6 +30,7 @@
     "express": "^4.15.5",
     "jquery": "^3.2.1",
     "mongodb": "^2.2.31",
+    "ng-drag-drop": "^4.0.0",
     "ngx-bootstrap": "^1.9.3",
     "ngx-permissions": "^2.1.1",
     "rxjs": "^5.2.0",

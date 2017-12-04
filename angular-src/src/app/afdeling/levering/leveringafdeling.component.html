@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<div class="container">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Bestellingen
+            </div>
+            <div class="panel-body">
+                <div class="card text-white bg-primary mb-3" *ngFor="let order of orders; let i = index" draggable [dragData]="order">
+                    <div class="card-body">
+                        <h4 class="card-title">Bestelling nr: {{order._id}}</h4>
+                        <p class="card-text">Deze bestelling is klaar voor verzending</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Chauffeurs
+            </div>
+            <div class="panel-body">
+                <div class="col-md-4" *ngFor="let user of chauffeurs; let i = index" droppable (onDrop)="onItemDrop(user, $event)">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-header">{{user.firstName}} {{user.lastName}}</div>
+                        <div class="card-body" style="border-top: 1px solid rgba(0,0,0,.125);" *ngFor="let order of user.teLeverenOrders; let i = index">
+                            <h4 class="card-title">Bestelling nr: {{order._id}}</h4>
+                            <p class="card-text">Deze bestelling is klaar voor verzending</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,4 +1,5 @@
 import { Locatie } from './locatie';
+import { Bestelling } from './bestelling';
 
 export class User {
     _id: string;
@@ -15,6 +16,8 @@ export class User {
     roles: string[];
     online: boolean;
     ordersIds: string[];
+    teLeverenOrdersIds: string[];
+    teLeverenOrders: Bestelling[];
 
     constructor(
         username: string,
