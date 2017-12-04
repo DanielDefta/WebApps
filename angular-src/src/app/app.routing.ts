@@ -50,7 +50,8 @@ const appRoutes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard, NgxPermissionsGuard],
     data:{
         permissions: {
-            only: ['CUSTOMER']
+            only: ['CUSTOMER'],
+            redirectTo: 'login'
         }
     }},
     { path: 'login', component: LoginComponent },
@@ -61,11 +62,11 @@ const appRoutes: Routes = [
     { path: 'placeorder', component: PlaceOrderComponent},
 
    // otherwise redirect to home
-    { path: '**', component: HomeComponent, canActivate: [AuthGuard, NgxPermissionsGuard],
+    { path: '**', component: DashboardComponent, canActivate: [AuthGuard, NgxPermissionsGuard],
     data:{
        permissions: {
-           only: ['EMPLOYEE'],
-           redirectTo: 'dashboard'
+           only: ['ADMIN'],
+           redirectTo: 'afdeling/bestelling'
        }
     }}
 ];

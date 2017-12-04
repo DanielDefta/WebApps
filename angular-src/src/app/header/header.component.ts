@@ -51,6 +51,9 @@ export class HeaderComponent implements OnInit {
 
 
         this.socketService.on('message-received', (msg: any) => {
+            if(this.currentUser === undefined || this.currentUser === null){
+                this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            }
             if (msg.naar === this.currentUser._id) {
                 let options = { //set options
                     body: msg.message,

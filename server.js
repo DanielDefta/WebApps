@@ -96,6 +96,7 @@ io.on('connection', function(socket){
 
    // Test Messages
   socket.on('send-message', (data) => {
+    console.log(data);
     socket.broadcast.emit('message-received', data);
   });
 

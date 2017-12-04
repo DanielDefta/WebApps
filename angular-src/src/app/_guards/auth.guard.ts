@@ -10,11 +10,8 @@ export class AuthGuard implements CanActivate{
   }
 
   canActivate(){
-    console.log("true");
     if(this.authService.loggedIn()){
-      console.log("true");
       if (sessionStorage.getItem('currentUser')) {
-        console.log("true");
         // logged in so return true
         const perm = JSON.parse(sessionStorage.getItem('currentUser')).roles;
         this.permissionsService.addPermission(perm);
