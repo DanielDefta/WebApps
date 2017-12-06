@@ -4,14 +4,11 @@ import { Observable } from 'rxjs/Rx';
 import { User } from '../../../_models/user';
 import { UserService } from '../../../_services/user.service';
 
-import { slideDownAnimation } from '../../../_animations/slide-down.animation';
+import { slideInOutAnimation } from '../../../_animations/slide-in-out.animation';
 
 @Component({
   selector: 'app-maindashboard',
-  templateUrl: './maindashboard.component.html',
-  animations: [slideDownAnimation],
-
-  host: { '[@slideDownAnimation]': '' }
+  templateUrl: './maindashboard.component.html'
 
 
 })

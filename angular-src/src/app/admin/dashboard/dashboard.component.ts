@@ -9,9 +9,9 @@ import { slideInOutAnimation } from '../../_animations/slide-in-out.animation';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
- /*  animations: [slideInOutAnimation],
+  animations: [slideInOutAnimation],
 
-  host: { '[@slideInOutAnimation]': '' } */
+  host: { '[@slideInOutAnimation]': '' } 
 
 
 })

@@ -34,24 +34,23 @@ export class HeaderComponent implements OnInit {
         private alertService: AlertService,
         private authenticationService: AuthenticationService,
         private pushNotification: PushNotificationsService,
-        private socketService: SocketService)
-    {
-        this.pushNotification.requestPermission();
+        private socketService: SocketService) {
     }
 
     ngOnInit() {
+        this.pushNotification.requestPermission();
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
         this.notificaties = JSON.parse(sessionStorage.getItem('notificaties'));
-        if(this.notificaties===null) this.notificaties = [];
+        if (this.notificaties === null) this.notificaties = [];
         this.aantalNotificaties = JSON.parse(sessionStorage.getItem('aantalNotificaties'));
         if (this.currentUser) {
             this.loadAllUsers();
-            
+
         }
 
 
         this.socketService.on('message-received', (msg: any) => {
-            if(this.currentUser === undefined || this.currentUser === null){
+            if (this.currentUser === undefined || this.currentUser === null) {
                 this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
             }
             if (msg.naar === this.currentUser._id) {
@@ -61,10 +60,12 @@ export class HeaderComponent implements OnInit {
                     vibrate: [200, 100, 200]
                 }
                 let naam = this.users.find(u => u._id === msg.van).firstName + this.users.find(u => u._id === msg.van).lastName;
-                this.pushNotification.create('New message from ' + naam, options).subscribe();
-                if(this.aantalNotificaties===undefined) this.aantalNotificaties=0;
+                if (this.pushNotification.permission === "granted") {
+                    this.pushNotification.create('New message from ' + naam, options).subscribe();
+                }
+                if (this.aantalNotificaties === undefined) this.aantalNotificaties = 0;
                 this.aantalNotificaties++;
-                this.notificaties.push({message:msg.message, from: naam})
+                this.notificaties.push({ message: msg.message, from: naam })
                 localStorage.setItem('notificaties', JSON.stringify(this.notificaties));
                 localStorage.setItem('aantalNotificaties', JSON.stringify(this.aantalNotificaties));
             }
@@ -82,7 +83,8 @@ export class HeaderComponent implements OnInit {
     }
 
     private loadAllUsers() {
-        this.userService.getAll().subscribe(users => { this.users = users; 
+        this.userService.getAll().subscribe(users => {
+        this.users = users;
             this.currentUser.online = true;
             this.userService.update(this.currentUser).subscribe();
             this.laadBedrijf();
@@ -93,8 +95,8 @@ export class HeaderComponent implements OnInit {
         this.authenticationService.logout();
     }
 
-    readNotifications(){
-        this.aantalNotificaties=null; 
+    readNotifications() {
+        this.aantalNotificaties = null;
         localStorage.setItem('aantalNotificaties', JSON.stringify(this.aantalNotificaties));
     }
 

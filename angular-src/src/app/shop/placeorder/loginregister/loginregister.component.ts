@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { slideInOutAnimation } from '../../../_animations/slide-in-out.animation';
+import { slideRightLeftAnimation } from '../../../_animations/slide-right-left.animation';
 import { UserService } from '../../../_services/user.service';
 import { AlertService } from '../../../_services/alert.service';
 import { Router } from '@angular/router';
@@ -14,9 +14,9 @@ import { OrderService } from '../../../_services/order.service';
     selector: 'app-loginregister',
     templateUrl: 'loginregister.component.html',
 
-    animations: [slideInOutAnimation],
+    animations: [slideRightLeftAnimation],
 
-    host: { '[@slideInOutAnimation]': '' }
+    host: { '[@slideRightLeftAnimation]': '' }
 })
 
 export class LoginRegisterComponent implements OnInit {

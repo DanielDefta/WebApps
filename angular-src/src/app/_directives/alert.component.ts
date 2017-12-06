@@ -13,15 +13,17 @@ import { Observable } from 'rxjs/Observable';
    animations: [trigger(
     'openClose',
     [
-      state('collapsed, void', style({top:'-400%'})),
+      state('collapsed, void', style({top:'-100px'})),
       state('expanded', style({top:'50px'})),
       transition(
-          'collapsed <=> expanded', [animate('0.5s ease-in-out'), animate('0.5s ease-in-out')])
+          'collapsed => expanded', [animate('1s ease-in-out')]),
+    transition(
+            'expanded => collapsed', [animate('3s ease-in-out')]),
     ])],
 })
 
 export class AlertComponent {
-    stateExpression: string;
+    stateExpression: string = 'collapsed';
     message: any;
 
     timerSubscription;
