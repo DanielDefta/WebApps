@@ -1,19 +1,61 @@
 <app-header></app-header>
-<div class="container">
-    <div style="width:100%;">
-        
-            <alert></alert>
-        <div class="jumbotron modal-content">
 
-            <h1>Hallo {{currentUser.firstName}}!</h1>
-            <h3>Alle geregistreerde gebruikers:</h3>
-            <ul>
-                <li *ngFor="let user of users">
-                    {{user.username}} ({{user.firstName}} {{user.lastName}}) ----------{{user.roles}} - <a (click)="deleteUser(user._id)">Verwijderen</a>
-                </li>
-                
-            <p><a [routerLink]="['/login']">Afmelden</a></p>
-            </ul>
+<div class="container">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Bestellingen
+                </div>
+                <!-- .panel-heading -->
+                <div class="panel-body">
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default" *ngFor="let order of currentUser.orders; let i = index">
+                            <div class="panel-heading">
+                                <div class="card text-white bg-primary mb-3">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Bestelling nr: {{order._id}}</h4>
+                                        <p>Status: {{order.statusDescription}}</p>
+                                        <p>Adress: {{order.locatie.straat}} {{order.locatie.nummer}}, {{order.locatie.postcode}} {{order.locatie.stad}}, {{order.locatie.land}}</p>
+                                    </div>
+                                </div>
+                                <a *ngIf="order.status != 'ORDER DELIVERED'" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="true" class="ng-tns-c1-1">Collapse</a>
+                            </div>
+                            <div *ngIf="order.status != 'ORDER DELIVERED'" id="collapse{{i}}" class="panel-collapse collapse in" aria-expanded="true" style="height: 331px;">
+                                <div class="panel-body">
+                                    <div class="map">
+                                        <agm-map [latitude]="order.lat" [longitude]="order.lng" [zoom]="17">
+                                            <agm-marker [latitude]="order.lat" [longitude]="order.lng" [iconUrl]="'assets/mapMarker.png'"></agm-marker>
+                                        </agm-map>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- .panel-body -->
+            </div>
         </div>
     </div>
-</div>
+
+<style>
+    .btnCustom {
+        height: 100%;
+        right: 0;
+        position: absolute;
+        top: 0;
+        width: 10%;
+        min-width: 75px;
+    }
+
+    .map {
+        width: 100%;
+        height: 300px;
+        display: flex;
+    }
+
+    agm-map {
+        -ms-flex-align: center;
+        height: 100%;
+        width: 100%;
+    }
+</style>

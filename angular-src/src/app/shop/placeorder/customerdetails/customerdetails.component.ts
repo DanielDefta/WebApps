@@ -39,31 +39,38 @@ export class CustomerDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.model = JSON.parse(sessionStorage.getItem("currentUser"));
-        if(this.model.locatie == undefined) this.model.locatie = new Locatie("","",undefined,"","");
+        if (this.model.locatie == undefined) this.model.locatie = new Locatie("", "", undefined, "", "");
 
-        this.orderService.order.subscribe(o=> this.order = o);
+        this.orderService.order.subscribe(o => this.order = o);
     }
 
-    placeOrder(){
+    placeOrder() {
         this.order.locatie = this.model.locatie;
-        this.order.customerId = this.model._id;
-        this.order.status = "NEW";
-        this.order.statusDescription = "Uw bestelling is geregistreerd en zal binnenkort verwerkt worden";
-        this.orderService.create(this.order).subscribe(
+        this.orderService.getLocation(this.order.locatie).subscribe(
             data => {
-                if(this.model.ordersIds==undefined) this.model.ordersIds = [];
-                this.model.ordersIds.push(data._id);
-                sessionStorage.setItem("currentUser", JSON.stringify(this.model));
-                console.log(this.model);
-                this.userService.update(this.model).subscribe(
-                    data =>{
-                        this.alertService.success(this.order.statusDescription,true);
-                        localStorage.removeItem("shoppingBag");
-                        this.orderService.setOrder(null);
-                        this.router.navigate(["/"]);
+                this.order.lat = data.results[0].geometry.location.lat;
+                this.order.lng = data.results[0].geometry.location.lng;
+
+                this.order.customerId = this.model._id;
+                this.order.status = "NEW";
+                this.order.statusDescription = "Uw bestelling is geregistreerd en zal binnenkort verwerkt worden";
+                this.orderService.create(this.order).subscribe(
+                    data => {
+                        if (this.model.ordersIds == undefined) this.model.ordersIds = [];
+                        this.model.ordersIds.push(data._id);
+                        sessionStorage.setItem("currentUser", JSON.stringify(this.model));
+                        console.log(this.model);
+                        this.userService.update(this.model).subscribe(
+                            data => {
+                                this.alertService.success(this.order.statusDescription, true);
+                                localStorage.removeItem("shoppingBag");
+                                this.orderService.setOrder(null);
+                                this.router.navigate(["/"]);
+                            }
+                        )
                     }
-                )
+                );
             }
-        )
+        );
     }
 }

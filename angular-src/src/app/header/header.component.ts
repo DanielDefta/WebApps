@@ -85,9 +85,7 @@ export class HeaderComponent implements OnInit {
     private loadAllUsers() {
         this.userService.getAll().subscribe(users => {
         this.users = users;
-            this.currentUser.online = true;
-            this.userService.update(this.currentUser).subscribe();
-            this.laadBedrijf();
+        this.laadBedrijf();
         });
     }
 

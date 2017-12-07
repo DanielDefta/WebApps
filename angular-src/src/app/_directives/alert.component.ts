@@ -28,12 +28,10 @@ export class AlertComponent {
 
     timerSubscription;
 
-    constructor(private alertService: AlertService) { }
+    constructor(private alertService: AlertService) {
+     }
 
     ngOnInit() {
-
-        this.stateExpression= 'expanded';
-        this.stateExpression= 'collapsed';
         this.alertService.getMessage().subscribe(message => { this.message = message; this.expand()});
     }
 

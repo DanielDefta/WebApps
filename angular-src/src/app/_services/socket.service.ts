@@ -6,8 +6,8 @@ export class SocketService {
   socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io.connect('http://localhost:4000')
-    //this.socket = io.connect('https://projectwebappsdaniel.herokuapp.com');
+    //this.socket = io.connect('http://localhost:4000')
+    this.socket = io.connect('https://projectwebappsdaniel.herokuapp.com');
     if(sessionStorage.getItem("currentUser")){
       let id = JSON.parse(sessionStorage.getItem("currentUser"))._id;
       this.socket.emit('online',id);

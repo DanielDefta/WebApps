@@ -8,8 +8,8 @@ export class BedrijfService {
     isDev:boolean;
 
     constructor(private http: Http) { 
-        //this.isDev=false; //bij deployen
-        this.isDev=true; //bij development
+        this.isDev=false; //bij deployen
+        //this.isDev=true; //bij development
     }
  
     getAll() {

@@ -46,6 +46,7 @@ import { LoginRegisterComponent } from './shop/placeorder/loginregister/loginreg
 import { CustomerDetailsComponent } from './shop/placeorder/customerdetails/customerdetails.component';
 
 import { NgDragDropModule } from 'ng-drag-drop';
+import { AgmCoreModule } from '@agm/core';
 
  
 @NgModule({
@@ -57,7 +58,10 @@ import { NgDragDropModule } from 'ng-drag-drop';
         NgxPermissionsModule.forRoot(),
         BrowserAnimationsModule,
         PushNotificationsModule,
-        NgDragDropModule.forRoot()     
+        NgDragDropModule.forRoot(),
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCfp0G7Yjzd6Sn20cOVtYCCc5-ZfO8WXMk'
+        })
     ],
     declarations: [
         AppComponent,

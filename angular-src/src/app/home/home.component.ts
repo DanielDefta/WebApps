@@ -9,7 +9,10 @@ import { Locatie } from '../_models/locatie';
 import { UserService } from '../_services/user.service';
 import { BedrijfService } from '../_services/bedrijf.service';
 
-import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
+import { slideInOutAnimation } from '../_animations/slide-in-out.animation';
+import { OrderService } from '../_services/order.service';
+import { SocketService } from '../_services/socket.service';
+import { Bestelling } from '../_models/bestelling';
 
 @Component({
     moduleId: module.id,
@@ -22,39 +25,37 @@ import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
 
 export class HomeComponent implements OnInit {
     currentUser: User;
-    users: User[] = [];
-    timerSubscription;
-    //bedrijf: Bedrijf = new Bedrijf("", "", new Locatie("", "", 10, "", ""));;
 
-    constructor(private permissionsService: NgxPermissionsService, private userService: UserService, private bedrijfService: BedrijfService) {
+    lat: number = 50.8944237;
+    lng: number = 4.0711835999999995;
+
+    constructor(private userService: UserService,
+        private orderService: OrderService,
+        private socketService: SocketService) {
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-        this.currentUser.online = true;
-        this.userService.update(this.currentUser).subscribe();
     }
 
     ngOnInit() {
-        this.loadAllUsers();
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-        this.currentUser.online = true;
-        this.userService.update(this.currentUser).subscribe();
+        if (this.currentUser.ordersIds != undefined) {
+            this.currentUser.ordersIds.forEach(oId => {
+                if (this.currentUser.orders === undefined) this.currentUser.orders = [];
+                this.orderService.getById(oId).subscribe(
+                    data => {
+                        this.currentUser.orders.push(data);
+                    }
+                );
+            });
+            console.log(this.currentUser);
+            this.socketService.on('receive-location', (data: any) => {
+                console.log("fkdjnfdskjbfndsbfjkdsbds");
+                let ord: Bestelling = this.currentUser.orders.find(o=>o._id === data.orderId);
+                if(ord != undefined && ord != null){
+                    ord.lat = data.lat;
+                    ord.lng = data.lng;
+                }
+            });
+        }    
     }
 
-
-    //deze methode moet weg
-    deleteUser(_id: string) {
-        console.log(_id);
-        this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
-        this.loadAllUsers();
-    }
-
-    //deze methode moet weg
-    private loadAllUsers() {
-        this.userService.getAll().subscribe(users => { this.users = users; });
-        this.subscribeToData();
-    }
-
-    //deze methode moet weg
-    private subscribeToData() {
-        this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
-    }
 }

@@ -11,6 +11,8 @@ export class Bestelling {
     locatie: Locatie;
     status: string;
     statusDescription: string;
+    lng: number;
+    lat: number;
 
     constructor(omschrijving:string,producten:Product[]){
          this.omschrijving = omschrijving;

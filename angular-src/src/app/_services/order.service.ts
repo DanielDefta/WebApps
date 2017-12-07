@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Bestelling } from '../_models/bestelling';
 import { AuthenticationService } from './authentication.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { Locatie } from '../_models/locatie';
 
 @Injectable()
 export class OrderService {
@@ -16,8 +17,8 @@ export class OrderService {
     loggedIn = this.loggedInSource.asObservable();
 
     constructor(private authService: AuthenticationService, private http: Http) {
-        //this.isDev=false; //bij deployen
-        this.isDev = true; //bij development
+        this.isDev=false; //bij deployen
+        //this.isDev = true; //bij development
 
         if (localStorage.getItem("shoppingBag"))
             this.setOrder(JSON.parse(localStorage.getItem("shoppingBag")));
@@ -50,6 +51,12 @@ export class OrderService {
 
     delete(_id: string) {
         return this.http.delete(this.prepEndpoint('/order/' + _id));
+    }
+
+    getLocation(locatie: Locatie){
+        let tekst = locatie.straat + locatie.nummer + locatie.stad + locatie.postcode+ locatie.land;
+        console.log(tekst);
+        return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+tekst+'&key=AIzaSyCfp0G7Yjzd6Sn20cOVtYCCc5-ZfO8WXMk').map((response: Response) => response.json());
     }
 
     prepEndpoint(ep) {

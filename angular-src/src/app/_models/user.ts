@@ -16,6 +16,7 @@ export class User {
     roles: string[];
     online: boolean;
     ordersIds: string[];
+    orders: Bestelling[];
     teLeverenOrdersIds: string[];
     teLeverenOrders: Bestelling[];
 

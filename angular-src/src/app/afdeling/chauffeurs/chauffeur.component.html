@@ -6,13 +6,57 @@
             <div class="panel-heading">
                 Bestellingen
             </div>
+            <!-- .panel-heading -->
             <div class="panel-body">
-                <div class="card text-white bg-primary mb-3" *ngFor="let order of currentUser.teLeverenOrders; let i = index">
-                    <div class="card-body">
-                        <h4 class="card-title">Bestelling nr: {{order._id}}</h4>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default" *ngFor="let order of currentUser.teLeverenOrders; let i = index">
+                        <div class="panel-heading">
+                            <div class="card text-white bg-primary mb-3">
+                                <div class="card-body">
+                                    <h4 class="card-title">Bestelling nr: {{order._id}}</h4>
+                                    <p>Status: {{order.status}}</p>
+                                    <p>Adress: {{order.locatie.straat}} {{order.locatie.nummer}}, {{order.locatie.postcode}} {{order.locatie.stad}}, {{order.locatie.land}}</p>
+                                    <button *ngIf="order.status === 'KLAAR VOOR VERZENDING'" class="btn btn-info btnCustom" (click)="pickUp(order)">Pick up</button>
+                                    <button *ngIf="order.status === 'ORDER PICKED UP'" class="btn btn-info btnCustom" (click)="deliver(order)">Delivered</button>
+                                </div>
+                            </div>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="true" class="ng-tns-c1-1">Collapse</a>
+                        </div>
+                        <div id="collapse{{i}}" class="panel-collapse collapse in" aria-expanded="true" style="height: 331px;">
+                            <div class="panel-body">
+                                <div class="map">
+                                    <agm-map [latitude]="order.lat" [longitude]="order.lng" [zoom]="17">
+                                        <agm-marker [latitude]="order.lat" [longitude]="order.lng" [iconUrl]="'assets/mapMarker.png'"></agm-marker>
+                                    </agm-map>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- .panel-body -->
         </div>
     </div>
 </div>
+<style>
+    .btnCustom {
+        height: 100%;
+        right: 0;
+        position: absolute;
+        top: 0;
+        width: 10%;
+        min-width: 75px;
+    }
+
+    .map {
+        width: 100%;
+        height: 300px;
+        display: flex;
+    }
+
+    agm-map {
+        -ms-flex-align: center;
+        height: 100%;
+        width: 100%;
+    }
+</style>

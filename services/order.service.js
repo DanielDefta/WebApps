@@ -80,7 +80,9 @@ function update(_id, orderParam) {
         totaal: orderParam.totaal,
         locatie: orderParam.locatie,
         status: orderParam.status,
-        statusDescription: orderParam.statusDescription
+        statusDescription: orderParam.statusDescription,
+        lat: orderParam.lat,
+        lng: orderParam.lng
     };
 
     db.orders.update(

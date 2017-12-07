@@ -32,8 +32,8 @@ const producten = require('./controllers/product.controller');
 const order = require('./controllers/order.controller');
 
 // Port Number: 1ste is voor development 2de voor prod en deployment
-const port =4000;
-//const port = process.env.PORT || 8080;
+//const port =4000;
+const port = process.env.PORT || 8080;
 
 // CORS Middleware
 app.use(cors());
@@ -98,7 +98,12 @@ io.on('connection', function(socket){
   socket.on('send-message', (data) => {
     console.log(data);
     socket.broadcast.emit('message-received', data);
-  });
+  })
+
+  socket.on('send-location', (data) => {
+    console.log(data);
+    socket.broadcast.emit('receive-location', data);
+  })
 
 });
 
