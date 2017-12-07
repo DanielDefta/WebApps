@@ -46,6 +46,10 @@ export class VerpakkingAfdelingComponent implements OnInit {
             order.statusDescription = "Uw order is verpakt en zal binnenkort verzonden worden";
             this.orderService.update(order).subscribe(
                 data=>{
+                    var index = this.orders.indexOf(order);
+                    if (index != -1) {
+                        this.orders.splice(index, 1);
+                    }
                     this.alertService.success("U hebt order met id "+ order._id + "succesfull verpakt. Deze is doorgestuurd naar de levering afdeling")
                 }
             );

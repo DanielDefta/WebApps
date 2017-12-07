@@ -16,8 +16,8 @@ export class OrderService {
     loggedIn = this.loggedInSource.asObservable();
 
     constructor(private authService: AuthenticationService, private http: Http) {
-        this.isDev=false; //bij deployen
-        //this.isDev = true; //bij development
+        //this.isDev=false; //bij deployen
+        this.isDev = true; //bij development
 
         if (localStorage.getItem("shoppingBag"))
             this.setOrder(JSON.parse(localStorage.getItem("shoppingBag")));

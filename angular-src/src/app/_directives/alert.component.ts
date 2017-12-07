@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
       transition(
           'collapsed => expanded', [animate('1s ease-in-out')]),
     transition(
-            'expanded => collapsed', [animate('3s ease-in-out')]),
+            'expanded => collapsed', [animate('2s ease-in-out')]),
     ])],
 })
 
@@ -31,6 +31,9 @@ export class AlertComponent {
     constructor(private alertService: AlertService) { }
 
     ngOnInit() {
+
+        this.stateExpression= 'expanded';
+        this.stateExpression= 'collapsed';
         this.alertService.getMessage().subscribe(message => { this.message = message; this.expand()});
     }
 

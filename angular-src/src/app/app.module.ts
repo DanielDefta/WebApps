@@ -36,6 +36,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { BestellingAfdelingComponent } from './afdeling/bestelling/bestellingafdeling.component';
 import { VerpakkingAfdelingComponent } from './afdeling/verpakking/verpakkingafdeling.component';
 import { LeveringAfdelingComponent } from './afdeling/levering/leveringafdeling.component';
+import { ChauffeurAfdelingComponent} from './afdeling/chauffeurs/chauffeur.component';
 import { MaindashboardComponent } from './admin/dashboard/mainDashboard/maindashboard.component';
 import { EmployeetableComponent } from './admin/employeetable/employeetable.component';
 import { ChatComponent } from './chat/chat.component';
@@ -74,6 +75,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
         BestellingAfdelingComponent,
         VerpakkingAfdelingComponent,
         LeveringAfdelingComponent,
+        ChauffeurAfdelingComponent,
         EmployeetableComponent,
         ChatComponent,
         ShoppingbagComponent,

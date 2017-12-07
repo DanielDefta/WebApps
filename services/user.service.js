@@ -37,6 +37,7 @@ function authenticate(username, password) {
                 locatie: user.locatie,
                 roles:user.roles,
                 ordersIds: user.ordersIds,
+                teLeverenOrdersIds: user.teLeverenOrdersIds,
                 token: 'JWT'+ jwt.sign(user, config.secret, {
                     expiresIn: 604800}) // 1 week {expiresIn:'20s'}) //error in de klassen jsonwebtoken/index.js:155:18
             });

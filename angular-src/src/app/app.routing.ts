@@ -14,6 +14,8 @@ import { NgxPermissionsGuard } from 'ngx-permissions';
 import { ChatComponent } from './chat/chat.component';
 import { VerpakkingAfdelingComponent } from './afdeling/verpakking/verpakkingafdeling.component';
 import { LeveringAfdelingComponent } from './afdeling/levering/leveringafdeling.component';
+import { ChauffeurAfdelingComponent} from './afdeling/chauffeurs/chauffeur.component';
+
 
 
 const appRoutes: Routes = [
@@ -44,6 +46,13 @@ const appRoutes: Routes = [
     data:{
         permissions: {
             only: ['LEVERING'],
+            redirectTo: 'afdeling/chauffeur'
+        }
+    }},
+    { path: 'afdeling/chauffeur', component: ChauffeurAfdelingComponent, canActivate: [AuthGuard, NgxPermissionsGuard],
+    data:{
+        permissions: {
+            only: ['CHAUFFEUR'],
             redirectTo: 'home'
         }
     }},

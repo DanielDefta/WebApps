@@ -25,7 +25,7 @@
             <div class="panel-body">
                 <div class="col-md-4" *ngFor="let user of chauffeurs; let i = index" droppable (onDrop)="onItemDrop(user, $event)">
                     <div class="card text-white bg-success mb-3">
-                        <div class="card-header">{{user.firstName}} {{user.lastName}}</div>
+                        <div class="card-header" style="background: darkgreen;">{{user.firstName}} {{user.lastName}}</div>
                         <div class="card-body" style="border-top: 1px solid rgba(0,0,0,.125);" *ngFor="let order of user.teLeverenOrders; let i = index">
                             <h4 class="card-title">Bestelling nr: {{order._id}}</h4>
                             <p class="card-text">Deze bestelling is klaar voor verzending</p>
