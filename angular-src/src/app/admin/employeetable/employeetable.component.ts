@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
+import { SocketService } from '../../_services/socket.service';
 
 @Component({
     selector: 'app-employeetable',
@@ -18,10 +19,22 @@ export class EmployeetableComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
     onlineUsers: User[] = [];
-    timerSubscription;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private socketService: SocketService) {
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        this.socketService.on('receive-user-online', (user: User)=> {
+            let u: User = this.users.find(us => us._id===user._id);
+            let index = this.onlineUsers.indexOf(u);
+            if(index === -1 ){
+                this.onlineUsers.push(u);
+            }
+        });
+        this.socketService.on('receive-user-offline', (data) => {
+            let u: User = this.onlineUsers.find(us => us._id===data);
+            if(u){
+                this.onlineUsers.splice(this.onlineUsers.indexOf(u,1));
+            }
+        })
     }
 
     ngOnInit() {
@@ -32,13 +45,10 @@ export class EmployeetableComponent implements OnInit {
     private loadAllUsers() {
         this.userService.getAll().subscribe(users => { this.users = users });
         this.onlineUsers = this.users.filter(user => user.online===true);
-        this.subscribeToData();
+        this.onlineUsers.push(this.currentUser);
     }
 
     //users updaten => da verwijderen en alleen als een user registreert dan toevoegen => socket.io
-    private subscribeToData() {
-        this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
-    }
 
     extend() {
         this.size = this.size === "col-lg-12" ? "col-lg-8" : "col-lg-12";
@@ -47,7 +57,6 @@ export class EmployeetableComponent implements OnInit {
 
     //methoden hieronder om te sorteren
     sortByfirstName() {
-        this.timerSubscription.unsubscribe();
         this.users = this.users.sort((user1, user2) => {
             if (user1.firstName > user2.firstName) {
                 return this.firstnameAlphabetical;
@@ -61,7 +70,6 @@ export class EmployeetableComponent implements OnInit {
         this.firstnameAlphabetical = -this.firstnameAlphabetical;
     }
     sortByLastName() {
-        this.timerSubscription.unsubscribe();
         this.users = this.users.sort((user1, user2) => {
             if (user1.lastName > user2.lastName) {
                 return this.lastnameAlphabetical;
@@ -75,7 +83,6 @@ export class EmployeetableComponent implements OnInit {
         this.lastnameAlphabetical = -this.lastnameAlphabetical;
     }
     sortByUsername() {
-        this.timerSubscription.unsubscribe();
         this.users = this.users.sort((user1, user2) => {
             if (user1.username > user2.username) {
                 return this.usernameAlphabetical;
@@ -89,7 +96,6 @@ export class EmployeetableComponent implements OnInit {
         this.usernameAlphabetical = -this.usernameAlphabetical;
     }
     sortByFunctie() {
-        this.timerSubscription.unsubscribe();
         this.users = this.users.sort((user1, user2) => {
             if (user1.roles > user2.roles) {
                 return this.rolesAlphabetical;

@@ -8,6 +8,7 @@ import { AlertService } from '../_services/alert.service';
 import {AuthenticationService} from '../_services/authentication.service';
 
 import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
+import { SocketService } from '../_services/socket.service';
  
 @Component({
     moduleId: module.id,
@@ -29,11 +30,12 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
+        private socketService: SocketService,
         private alertService: AlertService) { }
  
     ngOnInit() {
         // login resetten
- 
+        this.authenticationService.logout();
         // return url nemen
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         

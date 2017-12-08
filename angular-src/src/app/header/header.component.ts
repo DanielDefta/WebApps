@@ -44,6 +44,10 @@ export class HeaderComponent implements OnInit {
         if (this.notificaties === null) this.notificaties = [];
         this.aantalNotificaties = JSON.parse(sessionStorage.getItem('aantalNotificaties'));
         if (this.currentUser) {
+            this.currentUser.online = true;
+            this.socketService.emit("userOnline", this.currentUser);
+            sessionStorage.setItem('currentUser',JSON.stringify(this.currentUser));
+            this.userService.update(this.currentUser).subscribe();
             this.loadAllUsers();
 
         }

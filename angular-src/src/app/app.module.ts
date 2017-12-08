@@ -47,6 +47,8 @@ import { CustomerDetailsComponent } from './shop/placeorder/customerdetails/cust
 
 import { NgDragDropModule } from 'ng-drag-drop';
 import { AgmCoreModule } from '@agm/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
 
  
 @NgModule({
@@ -61,7 +63,7 @@ import { AgmCoreModule } from '@agm/core';
         NgDragDropModule.forRoot(),
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyCfp0G7Yjzd6Sn20cOVtYCCc5-ZfO8WXMk'
-        })
+        }),
     ],
     declarations: [
         AppComponent,
@@ -98,6 +100,10 @@ import { AgmCoreModule } from '@agm/core';
         ProductService,
         SocketService,
         OrderService,
+        { provide: APP_BASE_HREF, useValue: '/'}
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
     ],
     bootstrap: [AppComponent]
 })

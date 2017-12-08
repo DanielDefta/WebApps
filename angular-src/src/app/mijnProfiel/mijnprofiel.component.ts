@@ -19,7 +19,6 @@ import {slideInOutAnimation} from '../_animations/slide-in-out.animation';
 export class MijnprofielComponent implements OnInit {
    currentUser: User;
    users: User[] = [];
-    timerSubscription;
 
    constructor(private userService: UserService) {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
@@ -28,25 +27,7 @@ export class MijnprofielComponent implements OnInit {
    }
 
    ngOnInit() {
-       //moet weg
-       this.loadAllUsers();
+       
    }
 
-   //moet weg
-   deleteUser(_id: string) {
-       console.log(_id);
-       this.userService.delete(_id).subscribe(() => { this.loadAllUsers() });
-       this.loadAllUsers();
-   }
-
-   //moet weg
-   private loadAllUsers() {
-       this.userService.getAll().subscribe(users => { this.users = users; });
-       this.subscribeToData();
-   }
-
-   //moet weg
-   private subscribeToData(){
-       this.timerSubscription = Observable.timer(2000).first().subscribe(()=> this.loadAllUsers());
-   }
 }

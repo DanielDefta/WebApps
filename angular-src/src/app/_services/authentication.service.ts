@@ -9,13 +9,14 @@ import 'rxjs/add/operator/map'
 
 import {NgxPermissionsService} from 'ngx-permissions';
 import { UserService} from "./user.service";
+import { SocketService } from './socket.service';
  
 @Injectable()
 export class AuthenticationService {
     authToken: any;
     user: any;
     isDev:boolean;
-    constructor(private http:Http,private router: Router, private userService:UserService, private permissionsService: NgxPermissionsService) {
+    constructor(private http:Http, private userService:UserService, private permissionsService: NgxPermissionsService, private socketService: SocketService) {
         this.isDev=false; //bij deployen
         //this.isDev=true; //bij development
     }
@@ -37,13 +38,15 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         let user = JSON.parse(sessionStorage.getItem('currentUser'));
-        user.online = false;
-        this.userService.update(user).subscribe();
-        this.authToken = null;
-        this.user = null;
-        sessionStorage.clear();
-        this.permissionsService.flushPermissions();
-        this.router.navigate(['/login']);
+        if(user){
+          user.online = false;
+          this.userService.update(user).subscribe();
+          this.authToken = null;
+          this.user = null;
+          sessionStorage.clear();
+          this.permissionsService.flushPermissions();
+          this.socketService.emit('userOffline', user._id);
+        }
     }
     
       storeUserData(token, user){

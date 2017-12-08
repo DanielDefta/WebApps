@@ -204,15 +204,12 @@ function update(_id, userParam) {
                     }
                 });
         } else {
-            console.log("2");            
+            console.log(userParam.online);           
             updateUser();
         }
     });
 
-    function updateUser() {
-        // fields to update
-        console.log("2");  
-        console.log(userParam.ordersIds);      
+    function updateUser() {     
         var set = {
             firstName: userParam.firstName,
             lastName: userParam.lastName,

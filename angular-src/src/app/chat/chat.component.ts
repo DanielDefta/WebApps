@@ -21,24 +21,27 @@ export class ChatComponent implements OnInit {
 
     currentUser : User;
     users: User[] = [];
-    onlineUsers : User[] = [];
 
     currentConversation: Conversatie;
     afzender : User;
 
-    timerSubscription;
     messageSubscription;
 
     position = 'before';
 
     constructor(private userService : UserService, private conversationService:ConversationService, private socketService: SocketService){
         this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-        this.currentUser.online = true;
-        this.userService.update(this.currentUser).subscribe();
     }
 
     ngOnInit() {
         this.loadAllUsers();
+        this.socketService.on('receive-user-online', (user: User)=> {
+            this.users.find(us => us._id === user._id).online = true;
+        });
+        this.socketService.on('receive-user-offline', (data) => {
+            console.log(data);
+            this.users.find(us => us._id === data).online = false;
+        })
         this.socketService.on('message-received', (msg: any) => {
             console.log(msg);
             if(msg.naar === this.currentUser._id){
@@ -58,15 +61,14 @@ export class ChatComponent implements OnInit {
     }
 
     private loadAllUsers() {
-        this.userService.getAll().subscribe(users => { this.users = users });
-        this.onlineUsers = this.users.filter(user => user.online===true);
-        this.subscribeToData();
+        this.userService.getAll().subscribe(users => { 
+            this.users = users; 
+            this.users.find(u => u._id === this.currentUser._id).online = true;
+        });
     }
 
     //users updaten => da verwijderen en alleen als een user registreert dan toevoegen => socket.io
-    private subscribeToData() {
-        this.timerSubscription = Observable.timer(2000).first().subscribe(() => this.loadAllUsers());
-    }
+    
 
     //conersatie opladen in funtie van de 2 deelnemende users (parameter _id is de id van de ontvanger, de id van de huidige user wordt genomen van de currentUser)
     loadConversation(_id:string){

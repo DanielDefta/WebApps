@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { AlertService } from '../_services/alert.service';
 
 import { trigger, state, animate, transition, style } from '@angular/animations';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
    moduleId: module.id,
-   selector: 'alert',
+   selector: 'cl-alert',
    templateUrl: 'alert.component.html',
 
    animations: [trigger(

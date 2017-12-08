@@ -70,6 +70,7 @@ io.on('connection', function(socket){
   socket.on('disconnect', function(){
     //hier gaan we de user offline zetten in de databank
     //pretty ugly code :)))
+    socket.broadcast.emit('receive-user-offline', (socket.client.id));
     var config = require('./config/database');
     var _ = require('lodash');
     var Q = require('q');
@@ -103,6 +104,16 @@ io.on('connection', function(socket){
   socket.on('send-location', (data) => {
     console.log(data);
     socket.broadcast.emit('receive-location', data);
+  })
+  
+  socket.on('userOnline', (data) => {
+    console.log(data);
+    socket.broadcast.emit('receive-user-online', data);
+  })
+
+  socket.on('userOffline', (data) => {
+    console.log(data);
+    socket.broadcast.emit('receive-user-offline', data);
   })
 
 });
