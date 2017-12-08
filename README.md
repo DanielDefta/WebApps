@@ -6,17 +6,26 @@ https://projectwebappsdaniel.herokuapp.com
 
 User accounts:
 
-  Username              Password              Role
+  Username             Password               Role
   ----------------------------------------------------------------
   azerty                a                     ADMIN
+  
   bestelling            a                     EMPLOYEE, BESTELLING
+  
   verpakking            a                     EMPLOYEE, VERPAKKING
+  
   levering              a                     EMPLOYEE, LEVERING
+  
   ivobart               a                     EMPLOYEE, DRIVER
+  
   nicoletdaphne         a                     EMPLOYEE, DRIVER
+  
   ankelinda             a                     EMPLOYEE, DRIBER
+  
   customer1             a                     CUSTOMER
+  
   customer2             a                     CUSTOMER
+  
   
 Download and run info:
   1. The ports and urls are now configured to 8080 and the heroku app due to the last deploy.
