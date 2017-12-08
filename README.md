@@ -1,7 +1,34 @@
 # WebApps
 Project for WebApps class
 
+Url:
 https://projectwebappsdaniel.herokuapp.com
+
+User accounts:
+
+  Username              Password              Role
+  ----------------------------------------------------------------
+  azerty                a                     ADMIN
+  bestelling            a                     EMPLOYEE, BESTELLING
+  verpakking            a                     EMPLOYEE, VERPAKKING
+  levering              a                     EMPLOYEE, LEVERING
+  ivobart               a                     EMPLOYEE, DRIVER
+  nicoletdaphne         a                     EMPLOYEE, DRIVER
+  ankelinda             a                     EMPLOYEE, DRIBER
+  customer1             a                     CUSTOMER
+  customer2             a                     CUSTOMER
+  
+Download and run info:
+  1. The ports and urls are now configured to 8080 and the heroku app due to the last deploy.
+  2. In order to run the application localy the following must me changed:
+    - server.js line 35/36
+    - authentication.service.ts    line 20/21
+    - bedrijf.service.ts           line 11/12
+    - conversation.service.ts      line 11/12
+    - order.service.ts             line 20/21
+    - product.service.ts           line 11/12
+    - socket.service.ts            line 9/10
+    - user.service.ts              line 11/12
 
 Things you can do on the webapplication:
 
