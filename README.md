@@ -22,4 +22,5 @@ Things you can do on the webapplication:
     - Packaging department: Employees see the processed orders, the products of an order and pack them. Then sneding the order to the delivery department
     - Delivery department: Employees see al the orders that are ready for shippment. They can associate a driver for each order. Drag and drop
     - Drivers: see the orders that are associated with them. Can set the status of an order to "Order picked up" and "Order is on the way". During the delivery the location of the order is being live transmitted to the managers/orders department/customer.
+    - Customers see the location of the driver for each order that is being delivered at the same time (even by different drivers)
     
